@@ -1,32 +1,74 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import {mapGetters} from "vuex";
 
 require('./bootstrap');
 
+import router from './routes';
+import store from './stores';
+import CxltToastr from 'cxlt-vue2-toastr';
+import VueResource from 'vue-resource';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Vuelidate from 'vuelidate';
+
 window.Vue = require('vue');
+window.tkn = document.head.querySelector('meta[name="csrf-token"]').content;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+//importacion de estilos
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css';
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+const toastrConfigs = {
+    position: 'top right',
+    showDuration: 2000,
+    timeOut: 5000,
+    progressBar: true,
+    successColor: 'green',
+    infoColor: 'blue',
+    warningColor: 'orange',
+    errorColor: 'red',
+};
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(CxltToastr, toastrConfigs);
+Vue.use(VueResource);
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+Vue.use(Vuelidate);
+
+
+Vue.component('app', require('./pages/App.vue').default);
+Vue.component('home', require('./pages/Home.vue').default);
+Vue.component('sidebar', require('./componentes/sidebar.vue').default);
+Vue.component('navbar', require('./componentes/navbar.vue').default);
+
+// Vue.http.interceptors.push((request, next) => {
+//     request.headers.set('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
+//     next();
+// });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.loggedIn) {
+            next({
+                name: 'login',
+            })
+        }else {
+            next()
+        }
+    } else if (store.getters.loggedIn && ( to.name === 'login' || to.name === 'register' )) {
+        next({
+            name: 'dashboard',
+        })
+    }  else {
+        next() // make sure to always call next()!
+    }
+})
 
 const app = new Vue({
     el: '#app',
+    router,
+    store,
+    data: {
+    },
+    computed: {
+        ...mapGetters(['loggedIn'])
+    }
 });

@@ -12,7 +12,7 @@ class CrearUsuarioCommand implements Command
     private $name;
     private $password;
 
-    public function __construct(string $email, string $name, string $password)
+    public function __construct($email, $name, $password)
     {
         $this->email = $email;
         $this->name = $name;
