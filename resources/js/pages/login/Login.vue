@@ -73,7 +73,7 @@
                 .catch(error => {
                     this.error = error.response.data;
                     this.$toast.error({
-                        title: 'Éxito',
+                        title: 'Error',
                         message: this.error,
                     });
                 });

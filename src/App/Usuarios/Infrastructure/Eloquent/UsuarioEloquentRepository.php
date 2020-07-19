@@ -3,6 +3,7 @@
 namespace Skeleton\App\Usuarios\Infrastructure\Eloquent;
 
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Skeleton\App\Usuarios\Domain\Entity\UsuarioEntity;
 use Skeleton\App\Usuarios\Domain\Repository\UsuarioRepository;
 
@@ -30,5 +31,11 @@ class UsuarioEloquentRepository implements UsuarioRepository
     {
         $objet = $this->model::where('id', $usuario->getId())->first();
         $objet->delete();
+    }
+
+    public function findEmail(UsuarioEntity $usuario): ?User
+    {
+        $objet = User::where('email', $usuario->getEmail())->first();
+        return $objet;
     }
 }

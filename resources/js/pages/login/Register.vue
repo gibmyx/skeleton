@@ -74,7 +74,21 @@
                     password: this.password,
                     name: this.name,
                 }).then(response => {
+                    let message = response.data.message
+                    this.$toast.success({
+                        title: 'Éxito',
+                        message: message,
+                    });
+                    setTimeout(function(){
+                        this.limpiar();
+                        this.ir_login();
+                    }.bind(this), 2000);
                 }).catch(error => {
+                    let message = error.response.data;
+                    this.$toast.error({
+                        title: 'Error',
+                        message: message,
+                    });
                 })
             }
         }
