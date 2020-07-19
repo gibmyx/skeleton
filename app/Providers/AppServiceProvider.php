@@ -3,12 +3,18 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Skeleton\Usuarios\Application\Container\Contracts\Container;
-use Skeleton\Usuarios\Application\Container\LaravelContainer;
-use Skeleton\Usuarios\Domain\Bus\CommandBus;
-use Skeleton\Usuarios\Domain\Repository\UsuarioRepository;
-use Skeleton\Usuarios\Infrastructure\Bus\SimpleCommandBus;
-use Skeleton\Usuarios\Infrastructure\Eloquent\UsuarioEloquentRepository;
+
+use Skeleton\Services\Application\Container\Contracts\Container;
+use Skeleton\Services\Application\Container\LaravelContainer;
+
+use Skeleton\Services\Domain\Bus\CommandBus;
+use Skeleton\Services\Infrastructure\Bus\SimpleCommandBus;
+
+use Skeleton\App\Usuarios\Domain\Repository\UsuarioRepository;
+use Skeleton\App\Usuarios\Infrastructure\Eloquent\UsuarioEloquentRepository;
+
+use Skeleton\App\Authorization\Domain\Repository\ClienteHttpRepository;
+use Skeleton\App\Authorization\Infrastructure\ClientHtttp\GuzzleHttpReposiroty;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UsuarioRepository::class,
             UsuarioEloquentRepository::class
+        );
+
+        $this->app->bind(
+            ClienteHttpRepository::class,
+            GuzzleHttpReposiroty::class
         );
     }
 

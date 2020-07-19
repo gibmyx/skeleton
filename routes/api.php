@@ -12,10 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/login', 'AuthController@login');
 require base_path('/app/Http/Controllers/User/Routes/ApiRoutes.php');
-
-Route::middleware('auth:api')->post('/logout', 'AuthController@logout');
+require base_path('/app/Http/Controllers/Authorization/Routes/ApiRoutes.php');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

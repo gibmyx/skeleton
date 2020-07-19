@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
 
+namespace Skeleton\App\Authorization\Infrastructure\ClientHtttp;
+
+
+use Skeleton\App\Authorization\Domain\Entity\AuthEntity;
+use Skeleton\App\Authorization\Domain\Repository\ClienteHttpRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Illuminate\Http\Request;
-use Prooph\ServiceBus\CommandBus;
 
-class AuthController extends Controller
+final class GuzzleHttpReposiroty implements ClienteHttpRepository
 {
-    private $comandBus;
 
-    public function __construct(CommandBus $commandBus)
-    {
-        $this->comandBus = $commandBus;
-    }
-
-    public function login(Request $request)
+    public function login(AuthEntity $authEntity)
     {
         $http = new Client;
         try {
@@ -26,8 +22,8 @@ class AuthController extends Controller
                     'grant_type' => 'password',
                     'client_id' => config('services.passport.client_id'),
                     'client_secret' => config('services.passport.client_secret'),
-                    'username' => $request->username,
-                    'password' => $request->password,
+                    'username' => $authEntity->username(),
+                    'password' => $authEntity->password(),
                 ]
             ]);
 

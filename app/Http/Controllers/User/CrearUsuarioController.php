@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Prooph\ServiceBus\CommandBus;
-use Skeleton\Usuarios\Application\Command\CrearUsuarioCommand;
-//use Skeleton\Usuarios\Domain\Bus\CommandBus;
+use Skeleton\App\Usuarios\Application\Command\CrearUsuarioCommand;
 
 class CrearUsuarioController extends Controller
 {
