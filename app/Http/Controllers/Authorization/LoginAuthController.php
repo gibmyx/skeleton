@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Authorization;
 use Skeleton\App\Authorization\Application\Command\LoginCommand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Prooph\ServiceBus\CommandBus;
+use Skeleton\Services\Domain\Bus\CommandBus;
 
 class LoginAuthController extends Controller
 {
@@ -21,7 +21,6 @@ class LoginAuthController extends Controller
             $request->username,
             $request->password
         );
-
-        $this->comandBus->dispatch($command);
+        return $this->comandBus->dispatch($command);
     }
 }

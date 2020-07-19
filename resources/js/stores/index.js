@@ -35,15 +35,16 @@ const store = new Vuex.Store({
                     password: credentials.password,
                 })
                     .then(response => {
-                        //console.log(response)
-                        const token = response.data.access_token
-                        localStorage.setItem('access_token', token)
-                        context.commit('retrieveToken', token)
-
-                        resolve(response)
+                        if(typeof response.data.access_token == 'undefined'){
+                            reject({response: {data: 'Ha ocurrido un error con el servidor'}})
+                        }else{
+                            const token = response.data.access_token
+                            localStorage.setItem('access_token', token)
+                            context.commit('retrieveToken', token)
+                            resolve(response)
+                        }
                     })
                     .catch(error => {
-                        //console.log(error)
                         reject(error)
                     })
             })

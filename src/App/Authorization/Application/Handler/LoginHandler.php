@@ -22,7 +22,7 @@ class LoginHandler
             $command->getPassword()
         );
 
-        $this->repository->login($auth);
+        return $this->repository->login($auth);
     }
 
 }

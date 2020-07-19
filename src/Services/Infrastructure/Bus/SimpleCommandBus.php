@@ -18,7 +18,7 @@ final class SimpleCommandBus implements CommandBus
         $this->container = $container;
     }
 
-    public function execute($command)
+    public function dispatch($command)
     {
         return $this->resolveHandler($command)->__invoke($command);
     }
