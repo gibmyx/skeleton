@@ -7,8 +7,9 @@ use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
+use Prooph\ServiceBus\CommandBus;
 use Skeleton\Usuarios\Application\Command\CrearUsuarioCommand;
-use Skeleton\Usuarios\Domain\Bus\CommandBus;
+//use Skeleton\Usuarios\Domain\Bus\CommandBus;
 
 class AuthController extends Controller
 {
@@ -70,7 +71,7 @@ class AuthController extends Controller
                 $request->input('name'),
                 Hash::make($request->input('password'))
             );
-            $this->comandBus->execute($command);
+            $this->comandBus->dispatch($command);
 
         } catch (\Exception $e) {
             $error .= $e->getMessage();
