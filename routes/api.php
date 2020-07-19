@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::post('/login', 'AuthController@login');
-Route::post('/register', 'AuthController@register');
+require base_path('/app/Http/Controllers/User/Routes/ApiRoutes.php');
 
 Route::middleware('auth:api')->post('/logout', 'AuthController@logout');
 Route::middleware('auth:api')->get('/user', function (Request $request) {

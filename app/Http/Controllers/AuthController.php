@@ -5,11 +5,7 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Hash;
 use Prooph\ServiceBus\CommandBus;
-use Skeleton\Usuarios\Application\Command\CrearUsuarioCommand;
-//use Skeleton\Usuarios\Domain\Bus\CommandBus;
 
 class AuthController extends Controller
 {
@@ -57,30 +53,4 @@ class AuthController extends Controller
 
         return response()->json('Logged out successfully', 200);
     }
-
-
-    public function register(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-
-        $error = '';
-        try {
-
-            $command = new CrearUsuarioCommand(
-                $request->input('email'),
-                $request->input('name'),
-                Hash::make($request->input('password'))
-            );
-            $this->comandBus->dispatch($command);
-
-        } catch (\Exception $e) {
-            $error .= $e->getMessage();
-        }
-        $response = [
-            'message' => strlen($error) ? $error : 'Usuario creado con exito.',
-            'code' => strlen($error) ? 401 : 201,
-        ];
-        return response()->json($response, $response['code']);
-    }
-
 }
