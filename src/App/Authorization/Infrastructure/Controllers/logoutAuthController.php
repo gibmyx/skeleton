@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\Authorization;
+namespace Skeleton\App\Authorization\Infrastructure\Controllers;
 
 
 use App\Http\Controllers\Controller;

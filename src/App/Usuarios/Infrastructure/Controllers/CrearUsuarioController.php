@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User;
+
+namespace Skeleton\App\Usuarios\Infrastructure\Controllers;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
