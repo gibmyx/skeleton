@@ -1,2 +1,2 @@
 <?php
-Route::post('/register', 'User\CrearUsuarioController@register');
+Route::post('/register', 'Usuarios\Infrastructure\Controllers\CrearUsuarioController@register');
