@@ -18,6 +18,7 @@
         "behat/behat": "^3.7",
         "behat/mink": "^1.8",
         "behat/mink-extension": "^2.3",
+        "behat/mink-browserkit-driver": "^1.2",
         "laracasts/behat-laravel-extension": "^1.1",
 
         "beyondcode/laravel-dump-server": "^1.0",
