@@ -26,7 +26,7 @@ class CrearUsuarioHandler implements Hendler
             $command->getName(),
             $command->getPassword()
         );
-//        $this->crearUsuarioValidation->validation($usuario);
+
         $this->repository->save($usuario);
     }
 }
