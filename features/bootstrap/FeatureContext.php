@@ -2,6 +2,7 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
@@ -20,5 +21,21 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function __construct()
     {
+    }
+
+    /**
+     * @Given I send a GET request to :arg1
+     */
+    public function iSendAGetRequestTo($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the response content should be:
+     */
+    public function theResponseContentShouldBe(PyStringNode $string)
+    {
+        throw new PendingException();
     }
 }

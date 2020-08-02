@@ -1,5 +1,5 @@
 #imports:
-#  - tests/apps/gibmyx/features/backend.yml
+#  - features/apps/gibmyx/backend.yml
 
 default:
   extensions:
