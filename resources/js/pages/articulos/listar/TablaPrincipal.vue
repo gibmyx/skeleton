@@ -9,22 +9,6 @@
                 </button>
             </div>
             <div class="card-body">
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <select class="form-control col-md-3" id="opcion" name="opcion" v-model="opcion">
-                                <option value="nombre">Nombre</option>
-                                <option value="descripcion">Descripción</option>
-                            </select>
-                            <input type="text" id="texto" name="texto" class="form-control" v-model="texto"
-                                   @keyup.enter="listarArticulo(1)"
-                                   placeholder="Texto a buscar">
-                            <button class="btn btn-primary" @click.prevent="listarArticulo(1)"><i
-                                class="fa fa-search"></i> Buscar
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <table class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
@@ -40,7 +24,7 @@
                     </thead>
                     <tbody v-if="articulos.length >= 1">
                     <tr
-                        v-bind:is="'articulo'"
+                        v-bind:is="'fila'"
                         v-for="o in articulos"
                         :o="o"
                         v-on:editarCategoria="ModalArticulo($event)"
@@ -78,10 +62,6 @@
         </div>
         <!-- Fin ejemplo de tabla Listado -->
 
-
-        <!--Modal de agregar categoria-->
-        <modal-articulo :name="'ModalArticulo'" v-on:listarArticulo="listarArticulo(pagination.current_page)"
-                        ref="modalarticulo"></modal-articulo>
         <!--Modal de eliminar categoria-->
         <modal-estado :name="'ModalEstado'" v-on:listarArticulo="listarArticulo(pagination.current_page)"
                       ref="modalestado"></modal-estado>
@@ -92,15 +72,16 @@
 <script>
     import ModalEstado from "./../modal/ModalEstado";
     import ModalArticulo from "./../modal/ModalArticulo";
-    import Articulo from "./Articulo";
+    import Fila from "./Fila";
+    import qs from 'qs';
+    import params from "../data/params";
 
     export default {
-        name: "Articulos",
+        name: "TablaPrincipal",
 
         data () {
             return {
-                opcion: 'nombre',
-                texto: '',
+                params: params(),
                 articulos: [],
 
                 pagination: {
@@ -147,13 +128,25 @@
         },
 
         mounted() {
-            this.listarArticulo();
+            this.listarArticulo(1, this.params);
+            this.$root.$on('Buscar', data => {
+                console.log(data);
+            });
+        },
+
+        beforeDestroy: function () {
+            this.$root.$off('Buscar')
         },
 
         methods: {
-            listarArticulo(page = 1) {
-                let opcion = this.opcion;
-                axios.get('/articulos/ajax_listar_articulos?page=' + page + '&' + this.opcion + '=' + this.texto).then((response) => {
+            listarArticulo(page = 1, params = []){
+
+                let param = {
+                    page: page,
+                    params: params,
+                };
+
+                axios.get('api/articulos/ajax_listar_articulos?' + qs.stringify(param) ).then((response) => {
                     this.articulos = response.data.articulos;
                     this.pagination = response.data.pagination;
                 });
@@ -174,7 +167,7 @@
         components: {
             ModalArticulo,
             ModalEstado,
-            Articulo,
+            Fila,
         },
     }
 </script>

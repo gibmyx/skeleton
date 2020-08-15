@@ -1,9 +1,9 @@
 <?php
 
-namespace Skeleton\Share\Infrastructure\Bus;
+namespace Skeleton\Shared\Infrastructure\Bus;
 
-use Skeleton\Share\Application\Container\Contracts\Container;
-use Skeleton\Share\Domain\Bus\CommandBus;
+use Skeleton\Shared\Application\Container\Contracts\Container;
+use Skeleton\Shared\Domain\Bus\CommandBus;
 
 final class SimpleCommandBus implements CommandBus
 {

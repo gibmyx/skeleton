@@ -4,7 +4,7 @@
 namespace Skeleton\App\Authorization\Application\Command;
 
 
-use Skeleton\App\Authorization\Application\Command\Contracts\Command;
+use Skeleton\Shared\Application\Command\Command;
 
 class LoginCommand implements Command
 {

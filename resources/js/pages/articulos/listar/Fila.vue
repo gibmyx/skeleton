@@ -32,7 +32,7 @@
             o: Object,
         },
 
-        name: "Articulo",
+        name: "Fila",
 
         data () {
             return {

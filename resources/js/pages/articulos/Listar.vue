@@ -6,17 +6,20 @@
             <li class="breadcrumb-item">Almacén</li>
             <li class="breadcrumb-item active">Artículos</li>
         </ol>
-        <articulos></articulos>
+        <panel-busqueda></panel-busqueda>
+        <tabla-principal></tabla-principal>
     </main>
 </template>
 
 <script>
-import Articulos from "./listar/Articulos";
+import TablaPrincipal from "./listar/TablaPrincipal";
+import PanelBusqueda from "./listar/PanelBusqueda";
 
 export default {
     name: "listar",
     components: {
-        Articulos
+        TablaPrincipal,
+        PanelBusqueda,
     }
 }
 </script>

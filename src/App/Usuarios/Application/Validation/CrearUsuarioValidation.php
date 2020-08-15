@@ -2,22 +2,22 @@
 
 namespace Skeleton\App\Usuarios\Application\Validation;
 
-use Skeleton\App\Usuarios\Domain\Entity\UsuarioEntity;
-use Skeleton\App\Usuarios\Domain\Repository\UsuarioRepository;
+use Skeleton\App\Usuarios\Domain\Entity\ArticuloEntity;
+use Skeleton\App\Usuarios\Domain\Repository\ArticuloRepository;
 
 class CrearUsuarioValidation
 {
-    public function __construct(UsuarioRepository $repository)
+    public function __construct(ArticuloRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function validation(UsuarioEntity $usuarioEntity)
+    public function validation(ArticuloEntity $usuarioEntity)
     {
         $this->ValidateEmail($usuarioEntity);
     }
 
-    private function ValidateEmail(UsuarioEntity $usuarioEntity)
+    private function ValidateEmail(ArticuloEntity $usuarioEntity)
     {
         $objet = $this->repository->findEmail($usuarioEntity);
         if(!empty($objet)){

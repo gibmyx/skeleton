@@ -1,8 +1,8 @@
 <?php
 
-namespace Skeleton\Share\Application\Container;
+namespace Skeleton\Shared\Application\Container;
 
-use Skeleton\Share\Application\Container\Contracts\Container;
+use Skeleton\Shared\Application\Container\Contracts\Container;
 use Illuminate\Container\Container as IoC;
 
 class LaravelContainer implements Container

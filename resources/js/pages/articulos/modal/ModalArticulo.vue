@@ -165,7 +165,7 @@
                 modal.modal('show');
             },
             getCatalogo(articulo = null) {
-                axios.post('/articulos/ajax_get_catalogos').then((response) => {
+                axios.post('api/articulos/ajax_get_catalogos').then((response) => {
                     this.catalogos = response.data;
                 })
             },

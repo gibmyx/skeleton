@@ -4,8 +4,10 @@ namespace Skeleton\App\Authorization\Application\Handler;
 
 use Skeleton\App\Authorization\Domain\Entity\AuthEntity;
 use Skeleton\App\Authorization\Domain\Repository\ClienteHttpRepository;
+use Skeleton\Shared\Application\Command\Command;
+use Skeleton\Shared\Application\Handler\Hendler;
 
-class LoginHandler
+class LoginHandler implements Hendler
 {
     private $repository;
 
@@ -14,7 +16,7 @@ class LoginHandler
         $this->repository = $repository;
     }
 
-    public function __invoke($command)
+    public function __invoke(Command $command)
     {
 
         $auth = new AuthEntity(

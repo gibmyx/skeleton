@@ -28,7 +28,7 @@ return [
             'router' => [
                 'routes' => [
                     // list of commands with corresponding command handler
-                    Skeleton\App\Usuarios\Application\Command\CrearUsuarioCommand::class =>  Skeleton\App\Usuarios\Application\Handler\CrearUsuarioHandler::class,
+                    Skeleton\App\Usuarios\Application\Command\CrearUsuarioCommand::class =>  Skeleton\App\Usuarios\Application\Handler\ListarArticulosHandler::class,
                     Skeleton\App\Authorization\Application\Command\LoginCommand::class => Skeleton\App\Authorization\Application\Handler\LoginHandler::class
                 ],
             ],
