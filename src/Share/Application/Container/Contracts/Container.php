@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Services\Application\Container\Contracts;
+namespace Skeleton\Share\Application\Container\Contracts;
 
 interface Container
 {

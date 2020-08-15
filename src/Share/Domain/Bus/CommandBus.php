@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Services\Domain\Bus;
+namespace Skeleton\Share\Domain\Bus;
 
 interface CommandBus
 {

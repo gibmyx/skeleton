@@ -4,11 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use Skeleton\Services\Application\Container\Contracts\Container;
-use Skeleton\Services\Application\Container\LaravelContainer;
+use Skeleton\Share\Application\Container\Contracts\Container;
+use Skeleton\Share\Application\Container\LaravelContainer;
 
-use Skeleton\Services\Domain\Bus\CommandBus;
-use Skeleton\Services\Infrastructure\Bus\SimpleCommandBus;
+use Skeleton\Share\Domain\Bus\CommandBus;
+use Skeleton\Share\Infrastructure\Bus\SimpleCommandBus;
 
 use Skeleton\App\Usuarios\Domain\Repository\UsuarioRepository;
 use Skeleton\App\Usuarios\Infrastructure\Eloquent\UsuarioEloquentRepository;

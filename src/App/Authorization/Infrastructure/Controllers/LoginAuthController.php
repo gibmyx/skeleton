@@ -7,7 +7,7 @@ namespace Skeleton\App\Authorization\Infrastructure\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Skeleton\App\Authorization\Application\Command\LoginCommand;
-use Skeleton\Services\Domain\Bus\CommandBus;
+use Skeleton\Share\Domain\Bus\CommandBus;
 
 class LoginAuthController extends Controller
 {
