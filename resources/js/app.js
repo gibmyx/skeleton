@@ -44,24 +44,6 @@ Vue.component('navbar', require('./componentes/navbar.vue').default);
 //     next();
 // });
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!store.getters.loggedIn) {
-            next({
-                name: 'login',
-            })
-        }else {
-            next()
-        }
-    } else if (store.getters.loggedIn && ( to.name === 'login' || to.name === 'register' )) {
-        next({
-            name: 'dashboard',
-        })
-    }  else {
-        next() // make sure to always call next()!
-    }
-})
-
 const app = new Vue({
     el: '#app',
     router,

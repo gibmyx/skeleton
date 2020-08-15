@@ -17,7 +17,7 @@
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden" >
 <div id="app" class="full-screan">
-    <router-view name="header" v-show="loggedIn"></router-view>
+    <navbar v-show="loggedIn"></navbar>
     <div class="app-body" v-show="loggedIn">
         <sidebar></sidebar>
         <router-view></router-view>

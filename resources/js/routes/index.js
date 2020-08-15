@@ -7,12 +7,17 @@ Vue.use(VueRouter);
 import not404 from "../componentes/NotFound";
 import login from  "./../pages/login/router";
 import dashboard from  "./../pages/dashboard/router";
+import store from "../stores";
+import articulos from "./../pages/articulos/router";
+import categorias from "./../pages/categorias/router";
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         ...login,
         ...dashboard,
+        ...categorias,
+        ...articulos,
         //mensaje 404
         {
             path: '*',
@@ -20,5 +25,24 @@ const router = new VueRouter({
         }
     ],
 });
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.loggedIn) {
+            next({
+                name: 'login',
+            })
+        }else {
+            next()
+        }
+    } else if (store.getters.loggedIn && ( to.name === 'login' || to.name === 'register' )) {
+        next({
+            name: 'dashboard',
+        })
+    }  else {
+        next() // make sure to always call next()!
+    }
+})
 
 export default router;
