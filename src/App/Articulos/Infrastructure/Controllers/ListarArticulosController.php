@@ -28,7 +28,6 @@ class ListarArticulosController extends Controller
         );
 
         $response = $this->comandBus->dispatch($command);
-        $response = [];
         return response()->json($response);
     }
 }

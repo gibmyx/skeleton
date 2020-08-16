@@ -1,7 +1,8 @@
 <?php
 
-namespace Skeleton\App\Usuarios\Infrastructure\Eloquent;
+namespace Skeleton\App\Articulos\Infrastructure\Eloquent;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Skeleton\App\Articulos\Infrastructure\Models\Articulo;
 use Skeleton\App\Articulos\Domain\Entity\ArticuloEntity;
 use Skeleton\App\Articulos\Domain\Repository\ArticuloRepository;
@@ -33,8 +34,8 @@ class ArticuloEloquentRepository implements ArticuloRepository
         $objet->delete();
     }
 
-    public function search(Command $command): Articulo
+    public function searchList(Command $command) : LengthAwarePaginator
     {
-        return $this->model::DeFiltro($command->campos())->get();
+        return $this->model::DeFiltro($command->campos())->paginate(5);
     }
 }

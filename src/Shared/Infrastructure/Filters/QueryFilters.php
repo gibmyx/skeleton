@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 
-namespace Skeleton\App\Shared\Infrastructure\Filters;
+namespace Skeleton\Shared\Infrastructure\Filters;
 
 
 use Carbon\Carbon;

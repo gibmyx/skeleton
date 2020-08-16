@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Skeleton\App\Articulos\Domain\Repository\ArticuloRepository;
+use Skeleton\App\Articulos\Infrastructure\Eloquent\ArticuloEloquentRepository;
 use Skeleton\Shared\Application\Container\Contracts\Container;
 use Skeleton\Shared\Application\Container\LaravelContainer;
 
@@ -38,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UsuarioRepository::class,
             UsuarioEloquentRepository::class
+        );
+
+        $this->app->bind(
+            ArticuloRepository::class,
+            ArticuloEloquentRepository::class
         );
 
         $this->app->bind(

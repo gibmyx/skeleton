@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Artículos
-                <button type="button" class="btn btn-secondary" @click.prevent="ModalArticulo(null)">
+                <button type="button" class="btn btn-secondary" @click.prevent="IrFormularioCrear()">
                     <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
             </div>
@@ -63,7 +63,7 @@
         <!-- Fin ejemplo de tabla Listado -->
 
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:listarArticulo="listarArticulo(pagination.current_page)"
+        <modal-estado :name="'ModalEstado'" v-on:listarArticulo="listarArticulo(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
@@ -123,14 +123,12 @@
                 }
                 return pagesArray;
             },
-
-
         },
 
         mounted() {
             this.listarArticulo(1, this.params);
             this.$root.$on('Buscar', data => {
-                console.log(data);
+                this.listarArticulo(1, data);
             });
         },
 
@@ -140,13 +138,10 @@
 
         methods: {
             listarArticulo(page = 1, params = []){
-
                 let param = {
-                    page: page,
                     params: params,
                 };
-
-                axios.get('api/articulos/ajax_listar_articulos?' + qs.stringify(param) ).then((response) => {
+                axios.get('api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.articulos = response.data.articulos;
                     this.pagination = response.data.pagination;
                 });
@@ -154,7 +149,10 @@
             cambiarPagina(page) {
                 let me = this;
                 me.pagination.current_page = page;
-                me.listarArticulo(page)
+                me.listarArticulo(page, this.params)
+            },
+            IrFormularioCrear() {
+                this.$router.push({name: 'articulos_crear'})
             },
             ModalArticulo(articulo = null) {
                 this.$refs.modalarticulo.show(articulo);
