@@ -4,7 +4,7 @@
             <button type="button" class="btn btn-warning btn-sm" @click.prevent="EditarCategoria">
                 <i class="icon-pencil"></i>
             </button>
-            <button v-if="o.condicion"  type="button" class="btn btn-danger btn-sm" @click.prevent="DesactivarCategoria">
+            <button v-if="o.estado == 'activo'"  type="button" class="btn btn-danger btn-sm" @click.prevent="DesactivarCategoria">
                 <i class="icon-trash"></i>
             </button>
             <button v-else type="button" class="btn btn-info btn-sm" @click.prevent="DesactivarCategoria">
@@ -20,7 +20,7 @@
         <td width="10%" v-html="o.stock"></td>
 
         <td width="10%" class="text-center">
-            <span v-if="o.condicion" class="badge badge-success">Activo</span>
+            <span v-if="o.estado == 'activo'" class="badge badge-success">Activo</span>
             <span v-else class="badge badge-danger">Inactivo</span>
         </td>
     </tr>
@@ -45,7 +45,7 @@
                 precio_venta: '',
                 descripcion: '',
                 stock: '',
-                condicion: '',
+                estado: '',
             }
         },
 
@@ -60,7 +60,7 @@
                 this.precio_venta = this.o.precio_venta;
                 this.descripcion = this.o.descripcion;
                 this.stock = this.o.stock;
-                this.condicion = this.o.condicion;
+                this.estado = this.o.estado;
             });
         },
 
@@ -95,8 +95,8 @@
             stock(val){
                 this.o['stock'] = val;
             },
-            condicion(val){
-                this.o['condicion'] = val;
+            estado(val){
+                this.o['estado'] = val;
             },
         }
     }

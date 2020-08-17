@@ -36,10 +36,10 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown ml-5">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" style="margin-right: 50px;"
                    aria-haspopup="true" aria-expanded="false">
-                    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+<!--                    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
                     <span class="d-md-down-none">Gibmyx</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" style="margin-right: 50px;">

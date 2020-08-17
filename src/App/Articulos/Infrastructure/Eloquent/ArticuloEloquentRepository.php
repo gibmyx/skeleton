@@ -22,6 +22,12 @@ class ArticuloEloquentRepository implements ArticuloRepository
         $this->model->create(array_filter($entity->detalle()));
     }
 
+
+    public function FindUuid(string $uuid): Articulo
+    {
+        return Articulo::where('uuid', $uuid)->first();
+    }
+
     public function update(ArticuloEntity $entity): void
     {
         $objet = $this->model::where('id', $entity->getId())->first();
