@@ -55,7 +55,12 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Categoria <span style="color: red">*</span></label>
-                    <input type="text" name="Categoria" class="form-control" id="Categoria" v-model="categoria_id"/>
+                    <v-select :options="options"
+                              v-model="categoria_id"
+                              label="text"
+                              :reduce="categoria => categoria.id"
+                              taggable
+                    ></v-select>
                 </div>
             </div>
 
@@ -72,12 +77,14 @@
 <!--                </div>-->
 <!--            </div>-->
         </div>
+        <pre>{{detalle}}</pre>
     </div>
 </template>
 
 <script>
 import VueBarcode from 'vue-barcode';
 import QrcodeVue from "qrcode.vue";
+import 'vue-select/dist/vue-select.css';
 
 export default {
     name: "DatosGenerales",
@@ -95,6 +102,24 @@ export default {
             precio_venta: 0,
             stock: 0,
 
+            options: [
+                {
+                    text: 'hola',
+                    id: '1'
+                },
+                {
+                    text: 'chao',
+                    id: '2'
+                },
+                {
+                    text: 'hi',
+                    id: '3'
+                },
+                {
+                    text: 'goodbye',
+                    id: '4'
+                },
+            ],
             json: '',
         }
     },
@@ -151,7 +176,7 @@ export default {
 
     components: {
         'barcode': VueBarcode,
-        QrcodeVue
+        QrcodeVue,
     }
 }
 </script>
