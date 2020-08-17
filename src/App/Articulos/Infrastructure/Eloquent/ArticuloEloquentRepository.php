@@ -30,8 +30,8 @@ class ArticuloEloquentRepository implements ArticuloRepository
 
     public function update(ArticuloEntity $entity): void
     {
-        $objet = $this->model::where('id', $entity->getId())->first();
-        $objet->update($entity->getCreate());
+        $objet = $this->model::where('uuid', $entity->uuid())->first();
+        $objet->update($entity->detalle());
     }
 
     public function delete(ArticuloEntity $entity): void

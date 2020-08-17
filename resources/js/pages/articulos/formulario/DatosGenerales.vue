@@ -66,6 +66,11 @@
                     </barcode>
                 </div>
             </div>
+<!--            <div class="form-group row">-->
+<!--                <div class="col-md-auto">-->
+<!--                    <qrcode-vue :value="json" :size="size" level="H"></qrcode-vue>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </template>
@@ -89,6 +94,8 @@ export default {
             categoria_id: '',
             precio_venta: 0,
             stock: 0,
+
+            json: '',
         }
     },
 
@@ -106,6 +113,12 @@ export default {
             this.categoria_id = this.detalle.categoria_id;
             this.precio_venta = this.detalle.precio_venta;
             this.stock = this.detalle.stock;
+
+            this.json = JSON.stringify({
+                uuid: this.uuid,
+                codigo: this.codigo,
+                nombre: this.nombre,
+            });
         });
     },
 
@@ -138,6 +151,7 @@ export default {
 
     components: {
         'barcode': VueBarcode,
+        QrcodeVue
     }
 }
 </script>
