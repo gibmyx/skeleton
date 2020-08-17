@@ -1,18 +1,22 @@
 <?php
 
-namespace Skeleton\App\Articulos\Domain\Entity;
+declare(strict_types=1);
 
 
-final class ArticuloEntity
+namespace Skeleton\App\Articulos\Application\Command;
+
+
+use Skeleton\Shared\Application\Command\Command;
+
+final class CrearArticuloCommand implements Command
 {
-
-    private $uuid;
     private $detalle;
+    private $uuid;
 
     public function __construct(string $uuid, array $detalle)
     {
-        $this->uuid = $uuid;
         $this->detalle = $detalle;
+        $this->uuid = $uuid;
     }
 
     public function detalle(): array

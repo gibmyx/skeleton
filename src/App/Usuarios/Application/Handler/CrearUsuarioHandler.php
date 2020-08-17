@@ -3,9 +3,10 @@
 namespace Skeleton\App\Usuarios\Application\Handler;
 
 use Skeleton\App\Usuarios\Application\Validation\CrearUsuarioValidation;
-use Skeleton\App\Usuarios\Application\Handler\Contracts\Hendler;
 use Skeleton\App\Usuarios\Domain\Entity\UsuarioEntity;
 use Skeleton\App\Usuarios\Domain\Repository\UsuarioRepository;
+use Skeleton\Shared\Application\Command\Command;
+use Skeleton\Shared\Application\Handler\Hendler;
 
 class CrearUsuarioHandler implements Hendler
 {
@@ -18,7 +19,7 @@ class CrearUsuarioHandler implements Hendler
         $this->crearUsuarioValidation = $crearUsuarioValidation;
     }
 
-    public function __invoke($command)
+    public function __invoke(Command $command)
     {
 
         $usuario = new UsuarioEntity(

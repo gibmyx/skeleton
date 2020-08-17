@@ -27,7 +27,6 @@
                         v-bind:is="'fila'"
                         v-for="o in articulos"
                         :o="o"
-                        v-on:editarCategoria="ModalArticulo($event)"
                         v-on:EliminarCategoria="ModalDeshabilitar($event)"
                         :key="o.id">
                     </tr>
@@ -141,22 +140,22 @@
                 let param = {
                     params: params,
                 };
-                axios.get('api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
+                axios.get('/api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.articulos = response.data.articulos;
                     this.pagination = response.data.pagination;
                 });
             },
+
             cambiarPagina(page) {
                 let me = this;
                 me.pagination.current_page = page;
                 me.listarArticulo(page, this.params)
             },
+
             IrFormularioCrear() {
                 this.$router.push({name: 'articulos_crear'})
             },
-            ModalArticulo(articulo = null) {
-                this.$refs.modalarticulo.show(articulo);
-            },
+
             ModalDeshabilitar(articulo = null) {
                 this.$refs.modalestado.show(articulo);
             },

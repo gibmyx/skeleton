@@ -16,6 +16,7 @@ final class Articulo extends Model
     protected $table = 'articulos';
     protected $fillable = [
         'categoria_id',
+        'uuid',
         'codigo',
         'nombre',
         'precio_venta',

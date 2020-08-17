@@ -2,7 +2,8 @@
 
 namespace Skeleton\App\Usuarios\Application\Command;
 
-use Skeleton\App\Usuarios\Application\Command\Contracts\Command;
+
+use Skeleton\Shared\Application\Command\Command;
 
 class CrearUsuarioCommand implements Command
 {

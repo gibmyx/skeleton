@@ -17,20 +17,20 @@ class ArticuloEloquentRepository implements ArticuloRepository
         $this->model = $model;
     }
 
-    public function save(ArticuloEntity $usuario): void
+    public function save(ArticuloEntity $entity): void
     {
-        $this->model->create($usuario->getCreate());
+        $this->model->create(array_filter($entity->detalle()));
     }
 
-    public function update(ArticuloEntity $usuario): void
+    public function update(ArticuloEntity $entity): void
     {
-        $objet = $this->model::where('id', $usuario->getId())->first();
-        $objet->update($usuario->getCreate());
+        $objet = $this->model::where('id', $entity->getId())->first();
+        $objet->update($entity->getCreate());
     }
 
-    public function delete(ArticuloEntity $usuario): void
+    public function delete(ArticuloEntity $entity): void
     {
-        $objet = $this->model::where('id', $usuario->getId())->first();
+        $objet = $this->model::where('id', $entity->getId())->first();
         $objet->delete();
     }
 

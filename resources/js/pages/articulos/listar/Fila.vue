@@ -37,6 +37,7 @@
         data () {
             return {
                 id: '',
+                uuid: '',
                 nombre: '',
                 categoria_id: '',
                 categoria: '',
@@ -51,6 +52,7 @@
         mounted() {
             Vue.nextTick(() => {
                 this.id = this.o.id;
+                this.uuid = this.o.uuid;
                 this.nombre = this.o.nombre;
                 this.categoria_id = this.o.categoria_id;
                 this.categoria = this.o.categoria;
@@ -64,10 +66,10 @@
 
         methods: {
             EditarCategoria() {
-                this.$emit('editarCategoria', this.o);
+                this.$router.push({name: 'articulos_ver', params: {uuid: this.uuid}})
             },
-            DesactivarCategoria() {
 
+            DesactivarCategoria() {
                 this.$emit('EliminarCategoria', this.o);
             }
         },

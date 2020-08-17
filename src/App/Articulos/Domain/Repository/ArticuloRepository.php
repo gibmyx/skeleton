@@ -9,8 +9,8 @@ use Skeleton\Shared\Application\Command\Command;
 
 interface ArticuloRepository
 {
-    public function save(ArticuloEntity $article) : void;
-    public function update(ArticuloEntity $article) : void;
-    public function delete(ArticuloEntity $article) : void;
+    public function save(ArticuloEntity $entity) : void;
+    public function update(ArticuloEntity $entity) : void;
+    public function delete(ArticuloEntity $entity) : void;
     public function searchList(Command $command): LengthAwarePaginator;
 }

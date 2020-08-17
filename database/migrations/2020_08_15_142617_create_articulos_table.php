@@ -15,13 +15,14 @@ class CreateArticulosTable extends Migration
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid')->unique()->index();
 
+            $table->String('nombre', 50);
+            $table->decimal('precio_venta', 15, 5)->default(0);
+            $table->String('descripcion', 256)->default('');
+            $table->String('codigo', 50);
+            $table->integer('stock')->default('0');
             $table->integer('categoria_id')->unsigned();
-            $table->String('codigo', 50)->nullable();
-            $table->String('nombre', 50)->unique();
-            $table->decimal('precio_venta', 15, 5);
-            $table->integer('stock');
-            $table->String('descripcion', 256)->nullable();
             $table->String('estado', 50)->default('activo');
 
             $table->timestamps();

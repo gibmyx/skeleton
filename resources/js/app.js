@@ -35,7 +35,6 @@ Vue.use(IconsPlugin);
 Vue.use(Vuelidate);
 Vue.use(VueNumeric);
 
-
 Vue.component('app', require('./pages/App.vue').default);
 Vue.component('home', require('./pages/Home.vue').default);
 Vue.component('sidebar', require('./componentes/sidebar.vue').default);
