@@ -42,6 +42,6 @@ class ArticuloEloquentRepository implements ArticuloRepository
 
     public function searchList(Command $command) : LengthAwarePaginator
     {
-        return $this->model::DeFiltro($command->campos())->paginate(5);
+        return $this->model::DeFiltro($command->campos())->orderBy('id', 'desc')->paginate(5);
     }
 }

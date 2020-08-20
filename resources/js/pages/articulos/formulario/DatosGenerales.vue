@@ -104,19 +104,19 @@ export default {
 
             options: [
                 {
-                    text: 'hola',
+                    text: 'Telefono',
                     id: '1'
                 },
                 {
-                    text: 'chao',
+                    text: 'Laptos',
                     id: '2'
                 },
                 {
-                    text: 'hi',
+                    text: 'Alimentos',
                     id: '3'
                 },
                 {
-                    text: 'goodbye',
+                    text: 'Cocina',
                     id: '4'
                 },
             ],

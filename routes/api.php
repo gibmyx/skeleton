@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/flexio/guardar_items', 'Articulos\Infrastructure\Controllers\GuardarItemsController@__invoke');
 require base_path('/src/App/Usuarios/Infrastructure/Routes/routes.php');
 require base_path('/src/App/Authorization/Infrastructure/Routes/routes.php');
 require base_path('/src/App/Articulos/Infrastructure/Routes/routes.php');
