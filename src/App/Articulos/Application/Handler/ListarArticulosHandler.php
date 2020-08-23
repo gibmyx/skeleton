@@ -30,7 +30,20 @@ class ListarArticulosHandler implements Hendler
                 'from'          => $objets->firstItem(),
                 'to'            => $objets->lastItem(),
             ],
-            'articulos' => $objets->items(),
+            'articulos' => $objets->map(function ($articulos) {
+                return[
+                  'id' =>   $articulos->id,
+                  'uuid' =>   $articulos->uuid,
+                  'codigo' =>   $articulos->codigo,
+                  'nombre' =>   $articulos->nombre,
+                  'descripcion' =>   $articulos->descripcion,
+                  'categoria' =>   $articulos->categoria->nombre,
+                  'categoria_id' =>   $articulos->categoria_id,
+                  'precio_venta' =>   $articulos->precio_venta,
+                  'stock' =>   $articulos->stock,
+                  'estado' =>   $articulos->estado,
+                ];
+            }),
         ];
         return $data;
     }

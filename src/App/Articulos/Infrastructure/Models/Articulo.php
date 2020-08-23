@@ -9,6 +9,7 @@ namespace Skeleton\App\Articulos\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Skeleton\App\Articulos\Infrastructure\Filters\ArticulosQueryFilters;
+use Skeleton\App\Categorias\Infrastructure\Models\Categoria;
 
 
 final class Articulo extends Model
@@ -30,5 +31,12 @@ final class Articulo extends Model
         $queryFilter = new ArticulosQueryFilters();
         return $queryFilter->apply($query, $campo);
     }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+
 
 }
