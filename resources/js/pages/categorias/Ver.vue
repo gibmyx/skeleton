@@ -4,9 +4,9 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">Almacén</li>
-            <li class="breadcrumb-item active">Crear artículos</li>
+            <li class="breadcrumb-item active">Ver artículos</li>
         </ol>
-        <loading v-if="loading"></loading>
+        <loading  v-if="loading"></loading>
         <formulario :detalle="detalle" v-if="!loading"></formulario>
     </main>
 </template>
@@ -17,8 +17,11 @@ import detalle from "./data/detalle";
 import Loading from "./../../componentes/loading";
 
 export default {
-    name: "crear",
-    data() {
+    name: "ver",
+
+    props: ['uuid'],
+
+    data () {
         return {
             loading: true,
             detalle: detalle(),
@@ -28,23 +31,34 @@ export default {
     mounted() {
         if(this.loading){
             this.getCatalogos().then(() => {
-                setTimeout(() => { this.loading = false; }, 1000);
+                setTimeout(() => { this.loading = false; }, 2000);
             });
         }
     },
     methods: {
         getCatalogos() {
             return new Promise((resolve) => {
-                axios.get('/api/articulos/ajax_get_catalogos').then((response) => {
+                axios.get('/api/categorias/ajax_get_catalogos').then((response) => {
                     this.catalogos = response.data;
+                    this.getDetalle().then(() => {
                         resolve();
+                    });
                 });
             });
         },
+        getDetalle() {
+            return new Promise((resolve) => {
+                let params = {erptkn: tkn, uuid: this.uuid};
+                axios.get('/api/categorias/ajax_get_detalle/'+this.uuid).then((response) => {
+                    this.detalle = response.data;
+                    resolve();
+                });
+            });
+        }
     },
     components: {
-        Formulario,
         Loading,
+        Formulario,
     }
 }
 </script>

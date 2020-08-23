@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Categorías
-                <button type="button" class="btn btn-secondary" @click.prevent="ModalCategoria(null)">
+                <button type="button" class="btn btn-secondary" @click.prevent="IrFormularioCrear()">
                     <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
             </div>
@@ -144,8 +144,8 @@ export default {
             me.pagination.current_page = page;
             me.listarCategoria(page)
         },
-        ModalCategoria(categoria = null) {
-            this.$refs.modalcategoria.show(categoria);
+        IrFormularioCrear() {
+            this.$router.push({name: 'categorias_crear'})
         },
         ModalDeshabilitar(categoria = null) {
             this.$refs.modalestado.show(categoria);

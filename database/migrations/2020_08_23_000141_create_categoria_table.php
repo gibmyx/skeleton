@@ -15,6 +15,10 @@ class CreateCategoriaTable extends Migration
     {
         Schema::create('categoria', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid')->unique()->index();
+            $table->String('nombre', 50);
+            $table->String('descripcion', 256)->nullable();
+            $table->String('condicion')->default('activo');
             $table->timestamps();
         });
     }

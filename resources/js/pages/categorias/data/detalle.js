@@ -4,11 +4,8 @@ export default () => {
     return {
         id: '',
         uuid: uuidv4(),
-        codigo: '',
         nombre: '',
         descripcion: '',
-        categoria_id: '',
-        precio_venta: 0,
-        stock: 0,
+        condicion: '',
     }
 }

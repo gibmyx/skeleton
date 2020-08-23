@@ -22,25 +22,12 @@ export default {
         return {
             loading: true,
             detalle: detalle(),
-            catalogos: [],
         }
     },
     mounted() {
-        if(this.loading){
-            this.getCatalogos().then(() => {
-                setTimeout(() => { this.loading = false; }, 1000);
-            });
-        }
-    },
-    methods: {
-        getCatalogos() {
-            return new Promise((resolve) => {
-                axios.get('/api/articulos/ajax_get_catalogos').then((response) => {
-                    this.catalogos = response.data;
-                        resolve();
-                });
-            });
-        },
+        setTimeout(() => {
+            this.loading = false;
+        }, 1000);
     },
     components: {
         Formulario,
