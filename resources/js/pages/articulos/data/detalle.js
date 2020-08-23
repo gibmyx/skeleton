@@ -10,5 +10,6 @@ export default () => {
         categoria_id: '',
         precio_venta: 0,
         stock: 0,
+        estado: 'activo',
     }
 }

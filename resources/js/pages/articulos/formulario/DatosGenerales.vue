@@ -9,6 +9,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Nombre <span style="color: red">*</span></label>
                     <input type="text" name="Nombre" class="form-control" id="Nombre" v-model="nombre"/>
+                    <label class="mt-2" style="color: red" v-show="!$v.nombre.required&& submitStatus">El nombre es requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -23,6 +24,7 @@
                             :precision="2"
                         ></vue-numeric>
                     </div>
+                    <label class="mt-2" style="color: red" v-show="!$v.precio_venta.required&& submitStatus">El precio de venta es requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -37,6 +39,8 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Codigo <span style="color: red">*</span></label>
                     <input type="text" name="Codigo" class="form-control" id="Codigo" v-model="codigo"/>
+                    <label class="mt-2" style="color: red" v-show="!$v.codigo.required && submitStatus">El Codigo es requerido </label>
+                    <label class="mt-2" style="color: red" v-show="(!$v.codigo.minLength || !$v.codigo.maxLength) &&  submitStatus">El codigo debe tener entre 8 - 10 caracteres </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -51,11 +55,17 @@
                             v-model="stock"
                         ></vue-numeric>
                     </div>
+                    <label class="mt-2" style="color: red" v-show="!$v.stock.required && submitStatus">El Stock es requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Categoria <span style="color: red">*</span></label>
-                    <select2 v-model="categoria_id" :options="myOptions" :settings="{}" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />
+                    <select-2 class="form-control" name="Estado" required="" :config="{}" :attr="{}" v-model="categoria_id">
+                        <option value="">Seleccione</option>
+                        <option :value="termino_pago.id" v-for="termino_pago in catalogos.categorias"
+                                v-html="termino_pago.text"></option>
+                    </select-2>
+                    <label class="mt-2" style="color: red" v-show="!$v.categoria_id.required&& submitStatus">La Categoria es requerido </label>
                 </div>
             </div>
 
@@ -72,7 +82,6 @@
 <!--                </div>-->
 <!--            </div>-->
         </div>
-        <pre>{{detalle}}</pre>
     </div>
 </template>
 
@@ -80,11 +89,12 @@
 import VueBarcode from 'vue-barcode';
 import QrcodeVue from "qrcode.vue";
 import 'vue-select/dist/vue-select.css';
+import { required, minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {
     name: "DatosGenerales",
 
-    props: ['detalle'],
+    props: ['detalle', 'catalogos', 'submitStatus'],
 
     data() {
         return {
@@ -96,6 +106,7 @@ export default {
             categoria_id: '',
             precio_venta: 0,
             stock: 0,
+            estado: '',
             myOptions: [
                 {id: '1', text: 'Telefono'},
                 {id: '2', text: 'Laptos'},
@@ -106,12 +117,30 @@ export default {
         }
     },
 
-    methods: {
-        myChangeEvent(val){
-            console.log(val);
+    validations: {
+        nombre: {
+            required
         },
-        mySelectEvent({id, text}){
-            console.log({id, text})
+        precio_venta: {
+            required
+        },
+        categoria_id: {
+            required
+        },
+        stock: {
+            required
+        },
+        codigo: {
+            required,
+            minLength: minLength(8),
+            maxLength: maxLength(10),
+        },
+    },
+
+    methods: {
+        Validation() {
+            this.$v.$touch();
+            return this.validation = this.$v.$invalid ?  true :  false;
         }
     },
 
@@ -125,6 +154,7 @@ export default {
             this.categoria_id = this.detalle.categoria_id;
             this.precio_venta = this.detalle.precio_venta;
             this.stock = this.detalle.stock;
+            this.estado = this.detalle.estado;
 
             this.json = JSON.stringify({
                 uuid: this.uuid,
@@ -158,6 +188,9 @@ export default {
         },
         stock(val) {
             this.detalle['stock'] = val;
+        },
+        estado(val) {
+            this.detalle['estado'] = val;
         },
     },
 

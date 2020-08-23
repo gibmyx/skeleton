@@ -7,7 +7,7 @@
             <li class="breadcrumb-item active">Ver artículos</li>
         </ol>
         <loading  v-if="loading"></loading>
-        <formulario :detalle="detalle" v-if="!loading"></formulario>
+        <formulario :detalle="detalle" :catalogos="catalogos" v-if="!loading"></formulario>
     </main>
 </template>
 

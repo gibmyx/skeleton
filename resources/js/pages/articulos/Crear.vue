@@ -7,7 +7,7 @@
             <li class="breadcrumb-item active">Crear artículos</li>
         </ol>
         <loading v-if="loading"></loading>
-        <formulario :detalle="detalle" v-if="!loading"></formulario>
+        <formulario :detalle="detalle" :catalogos="catalogos" v-if="!loading"></formulario>
     </main>
 </template>
 
@@ -28,7 +28,7 @@ export default {
     mounted() {
         if(this.loading){
             this.getCatalogos().then(() => {
-                setTimeout(() => { this.loading = false; }, 1000);
+                this.loading = false;
             });
         }
     },

@@ -20,7 +20,7 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Estado <span style="color: red">*</span></label>
-                    <select-2 class="form-control" name="Estado" required="" :config="{}" :attr="{}" v-model="condicion">
+                    <select-2 class="form-control" name="Estado" required="" :config="{}" :attr="{}" v-model="estado">
                         <option value="">Seleccione</option>
                         <option :value="termino_pago.id" v-for="termino_pago in myOptions"
                                 v-html="termino_pago.text"></option>
@@ -51,7 +51,7 @@ export default {
             uuid: '',
             nombre: '',
             descripcion: '',
-            condicion: '',
+            estado: '',
             myOptions: [{id: 'activo', text: 'Activo'}, {id: 'inactivo', text: 'Inactivo'}],
 
             validation: false,
@@ -65,7 +65,7 @@ export default {
             this.uuid = this.detalle.uuid;
             this.nombre = this.detalle.nombre;
             this.descripcion = this.detalle.descripcion;
-            this.condicion = this.detalle.condicion;
+            this.estado = this.detalle.estado;
 
         });
     },
@@ -83,8 +83,8 @@ export default {
         descripcion(val) {
             this.detalle['descripcion'] = val;
         },
-        condicion(val) {
-            this.detalle['condicion'] = val;
+        estado(val) {
+            this.detalle['estado'] = val;
         },
     },
 
@@ -95,12 +95,7 @@ export default {
     },
 
     methods: {
-        myChangeEvent(val) {
-            console.log(val);
-        },
-        mySelectEvent({id, text}) {
-            console.log({id, text})
-        },
+
         Validation() {
             this.$v.$touch();
             return this.validation = this.$v.$invalid ?  true :  false;

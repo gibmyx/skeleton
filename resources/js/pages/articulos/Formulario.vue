@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <form id="myform" autocomplete="off">
             <!-- Ejemplo de tabla Listado -->
-            <datos-generales :detalle="detalle"></datos-generales>
+            <datos-generales :detalle="detalle"  :catalogos="catalogos" :submitStatus.sync="submitStatus" ref="detalle"></datos-generales>
 
             <div class="form-group row justify-content-end">
                 <div class="col-md-3 d-flex justify-content-center">
@@ -28,7 +28,13 @@ import qs from 'qs';
 export default {
     name: "formulario",
 
-    props: ['detalle'],
+    props: ['detalle', 'catalogos'],
+
+    data() {
+      return {
+          submitStatus: false,
+      }
+    },
 
     components: {
         DatosGenerales
@@ -46,6 +52,16 @@ export default {
             this.$router.push({name: 'articulos'})
         },
         Guardar() {
+            this.submitStatus = false;
+            if(this.$refs.detalle.Validation()){
+                this.submitStatus = true;
+                this.$toast.error({
+                    title: 'Error',
+                    message: 'Debe completar todos los campos requeridos *',
+                });
+                return 0;
+            }
+
             axios.post('/api/articulos/ajax_guardar/'+this.detalle.uuid, {params: this.detalle}).then((response) => {
                 let message = response.data.message
                 this.$toast.success({

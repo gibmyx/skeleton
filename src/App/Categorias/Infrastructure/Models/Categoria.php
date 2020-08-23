@@ -18,7 +18,7 @@ final class Categoria extends Model
         'uuid',
         'nombre',
         'descripcion',
-        'condicion',
+        'estado',
     ];
 
     public function scopeDeFiltro($query, $campo)
