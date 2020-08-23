@@ -248,6 +248,7 @@ textarea {
   line-height: inherit; }
 
 button,
+select,
 input {
   overflow: visible; }
 

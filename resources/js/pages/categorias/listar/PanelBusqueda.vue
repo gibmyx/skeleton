@@ -12,6 +12,12 @@
                         <label>Nombre</label>
                         <input type="text" name="Nombre" class="form-control" id="Nombre" v-model="params.nombre"/>
                     </div>
+                    <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label>Nombre</label>
+                        <select2>
+
+                        </select2>
+                    </div>
 
                 </div>
                 <div class="form-group row justify-content-end">

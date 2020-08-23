@@ -21,7 +21,15 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Estado <span style="color: red">*</span></label>
 <!--                    <v-select :options="options" :reduce="country => country.code" label="country" v-model="condicion"/>-->
-                    <select2 v-model="condicion" :options="myOptions" :settings="{}" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />
+                    <select-2 class="form-control" name="Estado" required="" :config="{}" :attr="{}" v-model="condicion">
+                        <option value="">Seleccione</option>
+                        <option :value="termino_pago.id" v-for="termino_pago in myOptions"
+                                v-html="termino_pago.text"></option>
+                    </select-2>
+<!--                    <select2 v-model="condicion" :options="myOptions" :settings="{}" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />-->
+<!--                    <select class="form-control">-->
+<!--                        <option value="">Seleccione</option>-->
+<!--                    </select>-->
                 </div>
 
             </div>
@@ -81,10 +89,10 @@ export default {
     },
 
     methods: {
-        myChangeEvent(val){
+        myChangeEvent(val) {
             console.log(val);
         },
-        mySelectEvent({id, text}){
+        mySelectEvent({id, text}) {
             console.log({id, text})
         }
     }
