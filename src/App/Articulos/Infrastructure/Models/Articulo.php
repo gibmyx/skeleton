@@ -23,7 +23,7 @@ final class Articulo extends Model
         'precio_venta',
         'stock',
         'descripcion',
-        'condicion',
+        'estado',
     ];
 
     public function scopeDeFiltro($query, $campo)

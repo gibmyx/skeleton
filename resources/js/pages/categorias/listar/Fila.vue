@@ -4,10 +4,10 @@
             <button type="button" class="btn btn-warning btn-sm" @click.prevent="EditarCategoria">
                 <i class="icon-pencil"></i>
             </button>
-            <button v-if="o.estado === 'activo'"  type="button" class="btn btn-danger btn-sm" @click.prevent="DesactivarCategoria">
+            <button v-if="o.estado === 'activo'"  type="button" class="btn btn-danger btn-sm" @click.prevent="changeState">
                 <i class="icon-trash"></i>
             </button>
-            <button v-else type="button" class="btn btn-info btn-sm" @click.prevent="DesactivarCategoria">
+            <button v-else type="button" class="btn btn-info btn-sm" @click.prevent="changeState">
                 <i class="icon-check"></i>
             </button>
         </td>
@@ -52,9 +52,8 @@ export default {
         EditarCategoria() {
             this.$router.push({name: 'categorias_ver', params: {uuid: this.uuid}})
         },
-        DesactivarCategoria() {
-
-            this.$emit('EliminarCategoria', this.o);
+        changeState() {
+            this.$emit('changeState', this.o);
         }
     },
     watch: {

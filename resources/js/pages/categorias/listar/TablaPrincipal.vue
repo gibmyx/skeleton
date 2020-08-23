@@ -24,7 +24,7 @@
                         v-bind:is="'fila'"
                         v-for="o in categorias"
                         :o="o"
-                        v-on:EliminarCategoria="ModalDeshabilitar($event)"
+                        v-on:changeState="ModalchangeState($event)"
                         :key="o.id">
                     </tr>
                     </tbody>
@@ -58,7 +58,7 @@
         </div>
 
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:listarCategoria="listarCategoria(pagination.current_page, params)"
+        <modal-estado :name="'ModalEstado'" v-on:Listar="Listar(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
@@ -126,14 +126,14 @@ export default {
     },
 
     mounted() {
-        this.listarCategoria(1, this.params);
+        this.Listar(1, this.params);
         this.$root.$on('Buscar', data => {
-            this.listarCategoria(1, data);
+            this.Listar(1, data);
         });
     },
 
     methods: {
-        listarCategoria(page = 1, params = []) {
+        Listar(page = 1, params = []) {
             let param = {
                 params: params,
             };
@@ -145,13 +145,13 @@ export default {
         cambiarPagina(page) {
             let me = this;
             me.pagination.current_page = page;
-            me.listarCategoria(page, this.params)
+            me.Listar(page, this.params)
         },
         IrFormularioCrear() {
             this.$router.push({name: 'categorias_crear'})
         },
-        ModalDeshabilitar(categoria = null) {
-            this.$refs.modalestado.show(categoria);
+        ModalchangeState(detalle = null) {
+            this.$refs.modalestado.show(detalle);
         },
     },
 

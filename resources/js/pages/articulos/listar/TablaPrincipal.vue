@@ -27,7 +27,7 @@
                         v-bind:is="'fila'"
                         v-for="o in articulos"
                         :o="o"
-                        v-on:EliminarCategoria="ModalDeshabilitar($event)"
+                        v-on:changeState="ModalchangeState($event)"
                         :key="o.id">
                     </tr>
                     </tbody>
@@ -62,7 +62,7 @@
         <!-- Fin ejemplo de tabla Listado -->
 
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:listarArticulo="listarArticulo(pagination.current_page, params)"
+        <modal-estado :name="'ModalEstado'" v-on:Listar="Listar(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
@@ -125,9 +125,9 @@
         },
 
         mounted() {
-            this.listarArticulo(1, this.params);
+            this.Listar(1, this.params);
             this.$root.$on('Buscar', data => {
-                this.listarArticulo(1, data);
+                this.Listar(1, data);
             });
         },
 
@@ -136,7 +136,7 @@
         },
 
         methods: {
-            listarArticulo(page = 1, params = []){
+            Listar(page = 1, params = []){
                 let param = {
                     params: params,
                 };
@@ -149,15 +149,15 @@
             cambiarPagina(page) {
                 let me = this;
                 me.pagination.current_page = page;
-                me.listarArticulo(page, this.params)
+                me.Listar(page, this.params)
             },
 
             IrFormularioCrear() {
                 this.$router.push({name: 'articulos_crear'})
             },
 
-            ModalDeshabilitar(articulo = null) {
-                this.$refs.modalestado.show(articulo);
+            ModalchangeState(detalle) {
+                this.$refs.modalestado.show(detalle);
             },
         },
 

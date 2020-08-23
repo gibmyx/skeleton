@@ -1,5 +1,5 @@
 <template>
-    <select style="background-color: #00aced" class="select" :multiple="!!attr.multiple">
+    <select :multiple="!!attr.multiple">
         <slot></slot>
     </select>
 </template>
@@ -12,7 +12,7 @@ export default {
         return {
             myConfig: {
                 minimumInputLength: 0,
-                width: '100%'
+                width: '100%',
             },
 
             myAjax: {
@@ -34,8 +34,8 @@ export default {
     },
 
     mounted() {
-        window.$ = window.jQuery = require('jquery');
         let vm = this;
+        let $ = window.jQuery = require('jquery');
 
         this.myConfig = $.extend(this.myConfig, this.config);
         if (this.config.ajax)
@@ -61,6 +61,8 @@ export default {
 
     watch: {
         value(value, oldValue) {
+            let $ = window.jQuery = require('jquery');
+
             let self = this;
             let isValidValue = (val) => {
                 if (typeof val === 'object' && !_.isEmpty(val)) {
@@ -118,6 +120,7 @@ export default {
     },
 
     destroyed() {
+        let $ = window.jQuery = require('jquery');
         $(this.$el).off().select2('destroy');
     }
 };
