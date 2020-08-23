@@ -13,7 +13,7 @@ class CreateCategoriaTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
             $table->String('nombre', 50);

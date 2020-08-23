@@ -6,6 +6,6 @@ export default () => {
         uuid: uuidv4(),
         nombre: '',
         descripcion: '',
-        condicion: '',
+        condicion: 'activo',
     }
 }

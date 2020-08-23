@@ -9,7 +9,7 @@ import VueResource from 'vue-resource';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vuelidate from 'vuelidate';
 import VueNumeric from 'vue-numeric';
-import vSelect from 'vue-select'
+import Select2 from 'v-select2-component';
 
 window.Vue = require('vue');
 window.tkn = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -36,7 +36,7 @@ Vue.use(IconsPlugin);
 Vue.use(Vuelidate);
 Vue.use(VueNumeric);
 
-Vue.component('v-select', vSelect)
+Vue.component('select2', Select2);
 Vue.component('app', require('./pages/App.vue').default);
 Vue.component('home', require('./pages/Home.vue').default);
 Vue.component('sidebar', require('./componentes/sidebar.vue').default);

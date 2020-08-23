@@ -19,12 +19,11 @@
                         <th width="20%" class="text-center">Estado</th>
                     </tr>
                     </thead>
-                    <tbody v-if="categorias.length > 1">
+                    <tbody v-if="categorias.length >= 1">
                     <tr
                         v-bind:is="'fila'"
                         v-for="o in categorias"
                         :o="o"
-                        v-on:editarCategoria="ModalCategoria($event)"
                         v-on:EliminarCategoria="ModalDeshabilitar($event)"
                         :key="o.id">
                     </tr>
@@ -58,27 +57,26 @@
             </div>
         </div>
 
-        <!--Modal de agregar categoria-->
-        <modal-categoria :name="'ModalCategoria'" v-on:listarCategoria="listarCategoria(pagination.current_page)"
-                         ref="modalcategoria"></modal-categoria>
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:listarCategoria="listarCategoria(pagination.current_page)"
+        <modal-estado :name="'ModalEstado'" v-on:listarCategoria="listarCategoria(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
 </template>
 
 <script>
-import Filas from "./Fila";
-import ModalCategoria from "./../modal/ModalCategoria";
+import Fila from "./Fila";
 import ModalEstado from "./../modal/ModalEstado";
 import qs from 'qs';
+import params from "../../articulos/data/params";
 
 export default {
     name: "Categorias",
 
     data() {
         return {
+            params: params(),
+
             opcion: 'nombre',
             texto: '',
             categorias: [],
@@ -128,21 +126,26 @@ export default {
     },
 
     mounted() {
-        this.listarCategoria();
+        this.listarCategoria(1, this.params);
+        this.$root.$on('Buscar', data => {
+            this.listarCategoria(1, data);
+        });
     },
 
     methods: {
-        listarCategoria(page = 1) {
-            let opcion = this.opcion;
-            axios.post('/categorias/ajax_listar_categoria?page=' + page + '&' + this.opcion + '=' + this.texto).then((response) => {
-                this.categorias = response.data.categorias.data;
+        listarCategoria(page = 1, params = []) {
+            let param = {
+                params: params,
+            };
+            axios.get('/api/categorias/ajax_listar_categorias?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
+                this.categorias = response.data.categorias;
                 this.pagination = response.data.pagination;
             });
         },
         cambiarPagina(page) {
             let me = this;
             me.pagination.current_page = page;
-            me.listarCategoria(page)
+            me.listarCategoria(page, this.params)
         },
         IrFormularioCrear() {
             this.$router.push({name: 'categorias_crear'})
@@ -153,8 +156,7 @@ export default {
     },
 
     components: {
-        Filas,
-        ModalCategoria,
+        Fila,
         ModalEstado,
     },
 }
@@ -164,19 +166,3 @@ export default {
 
 </style>
 
-<!--                <div class="form-group row">-->
-<!--                    <div class="col-md-6">-->
-<!--                        <div class="input-group">-->
-<!--                            <select class="form-control col-md-3" id="opcion" name="opcion" v-model="opcion">-->
-<!--                                <option value="nombre">Nombre</option>-->
-<!--                                <option value="descripcion">Descripción</option>-->
-<!--                            </select>-->
-<!--                            <input type="text" id="texto" name="texto" class="form-control" v-model="texto"-->
-<!--                                   @keyup.enter="listarCategoria(1)"-->
-<!--                                   placeholder="Texto a buscar">-->
-<!--                            <button type="submit" class="btn btn-primary" @click.prevent="listarCategoria(1)"><i-->
-<!--                                class="fa fa-search"></i> Buscar-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->

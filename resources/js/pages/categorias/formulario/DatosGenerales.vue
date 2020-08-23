@@ -20,7 +20,8 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Estado <span style="color: red">*</span></label>
-                    <v-select :options="options" :reduce="country => country.code" label="country" v-model="condicion"/>
+<!--                    <v-select :options="options" :reduce="country => country.code" label="country" v-model="condicion"/>-->
+                    <select2 v-model="condicion" :options="myOptions" :settings="{}" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />
                 </div>
 
             </div>
@@ -30,8 +31,6 @@
 </template>
 
 <script>
-import VueBarcode from 'vue-barcode';
-import QrcodeVue from "qrcode.vue";
 import 'vue-select/dist/vue-select.css';
 
 export default {
@@ -46,11 +45,10 @@ export default {
             nombre: '',
             descripcion: '',
             condicion: '',
-            options: [{code: 'CA', country: 'Canada'}],
+            myOptions: [{id: 'activo', text: 'Activo'}, {id: 'inactivo', text: 'Inactivo'}]
+
         }
     },
-
-    methods: {},
 
     mounted() {
         Vue.nextTick(() => {
@@ -81,6 +79,15 @@ export default {
             this.detalle['condicion'] = val;
         },
     },
+
+    methods: {
+        myChangeEvent(val){
+            console.log(val);
+        },
+        mySelectEvent({id, text}){
+            console.log({id, text})
+        }
+    }
 }
 </script>
 

@@ -55,12 +55,7 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Categoria <span style="color: red">*</span></label>
-                    <v-select :options="options"
-                              v-model="categoria_id"
-                              label="text"
-                              :reduce="categoria => categoria.id"
-                              taggable
-                    ></v-select>
+                    <select2 v-model="categoria_id" :options="myOptions" :settings="{}" @change="myChangeEvent($event)" @select="mySelectEvent($event)" />
                 </div>
             </div>
 
@@ -101,31 +96,23 @@ export default {
             categoria_id: '',
             precio_venta: 0,
             stock: 0,
-
-            options: [
-                {
-                    text: 'Telefono',
-                    id: '1'
-                },
-                {
-                    text: 'Laptos',
-                    id: '2'
-                },
-                {
-                    text: 'Alimentos',
-                    id: '3'
-                },
-                {
-                    text: 'Cocina',
-                    id: '4'
-                },
-            ],
+            myOptions: [
+                {id: '1', text: 'Telefono'},
+                {id: '2', text: 'Laptos'},
+                {id: '3', text: 'Alimentos'},
+                {id: '4', text: 'Cocina'},
+                ],
             json: '',
         }
     },
 
     methods: {
-
+        myChangeEvent(val){
+            console.log(val);
+        },
+        mySelectEvent({id, text}){
+            console.log({id, text})
+        }
     },
 
     mounted() {

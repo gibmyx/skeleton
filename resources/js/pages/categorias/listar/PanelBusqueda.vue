@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import params from "../data/params";
+import params from "./../data/params";
 
 export default {
     name: "PanelBusqueda",

@@ -14,7 +14,7 @@
         <td width="20%" v-html="o.nombre"></td>
         <td width="30%" v-html="o.descripcion"></td>
         <td width="20%" class="text-center">
-            <span v-if="o.condicion" class="badge badge-success">Activo</span>
+            <span v-if="o.condicion === 'activo'" class="badge badge-success">Activo</span>
             <span v-else class="badge badge-danger">Inactivo</span>
         </td>
     </tr>
@@ -31,6 +31,7 @@ export default {
     data () {
         return {
             id: '',
+            uuid: '',
             nombre: '',
             descripcion: '',
             condicion: '',
@@ -40,6 +41,7 @@ export default {
     mounted() {
         Vue.nextTick(() => {
             this.id = this.o.id;
+            this.uuid = this.o.uuid;
             this.nombre = this.o.nombre;
             this.descripcion = this.o.descripcion;
             this.condicion = this.o.condicion;
@@ -48,7 +50,7 @@ export default {
 
     methods: {
         EditarCategoria() {
-            this.$emit('editarCategoria', this.o);
+            this.$router.push({name: 'categorias_ver', params: {uuid: this.uuid}})
         },
         DesactivarCategoria() {
 
@@ -58,6 +60,9 @@ export default {
     watch: {
         id(val){
             this.o['id'] = val;
+        },
+        uuid(val){
+            this.o['uuid'] = val;
         },
         nombre(val){
             this.o['nombre'] = val;
