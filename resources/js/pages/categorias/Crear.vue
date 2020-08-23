@@ -4,7 +4,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">Almacén</li>
-            <li class="breadcrumb-item active">Crear artículos</li>
+            <li class="breadcrumb-item active">Crear categorias</li>
         </ol>
         <loading v-if="loading"></loading>
         <formulario :detalle="detalle" v-if="!loading"></formulario>

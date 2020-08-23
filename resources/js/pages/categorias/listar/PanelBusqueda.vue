@@ -16,12 +16,12 @@
                 </div>
                 <div class="form-group row justify-content-end">
                     <div class="col-md-2 d-flex justify-content-center">
-                        <button class="btn btn-info btn-block" @click.prevent="LimpiarBusqueda()"><i
+                        <button class="btn btn-info btn-block" @click.prevent="LimpiarBusqueda"><i
                             class="fa fa-clean"></i> Limpiar
                         </button>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
-                        <button class="btn btn-primary btn-block" @click.prevent="listarArticulo(1)"><i
+                        <button class="btn btn-primary btn-block" @click.prevent="listarArticulo"><i
                             class="fa fa-search"></i> Buscar
                         </button>
                     </div>

@@ -4,7 +4,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">Almacén</li>
-            <li class="breadcrumb-item active">Artículos</li>
+            <li class="breadcrumb-item active">Categorias</li>
         </ol>
         <panel-busqueda></panel-busqueda>
         <tabla-principal></tabla-principal>
