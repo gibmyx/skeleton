@@ -1,9 +1,9 @@
-import Categorias from "../Categorias";
+import Listar from "./../Listar";
 
 export default [
     {
         path: '/categorias',
         name: 'categorias',
-        component: Categorias
+        component: Listar
     },
 ];
