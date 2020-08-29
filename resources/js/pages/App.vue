@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row full-screan d-flex justify-content-center align-content-center text-center">
-            <router-view></router-view>
+            <router-view v-if="!loggedIn"></router-view>
         </div>
     </div>
 </template>

@@ -9,8 +9,8 @@ import not404 from "../componentes/NotFound";
 import login from  "./../pages/login/router";
 import dashboard from  "./../pages/dashboard/router";
 import articulos from "./../pages/articulos/router";
-// import categorias from "./../pages/categorias/router";
-// import proveedores from "./../pages/proveedores/router";
+import categorias from "./../pages/categorias/router";
+import proveedores from "./../pages/proveedores/router";
 
 const router = new VueRouter({
     mode: 'history',
@@ -18,8 +18,8 @@ const router = new VueRouter({
         ...login,
         ...dashboard,
         ...articulos,
-        // ...categorias,
-        // ...proveedores,
+        ...categorias,
+        ...proveedores,
         //mensaje 404
         {
             path: '*',

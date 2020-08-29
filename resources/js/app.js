@@ -39,7 +39,6 @@ Vue.use(VueNumeric);
 
 // Vue.component('select2', Select2);
 Vue.component('app', require('./pages/App.vue').default);
-Vue.component('home', require('./pages/Home.vue').default);
 Vue.component('sidebar', require('./componentes/sidebar.vue').default);
 Vue.component('navbar', require('./componentes/navbar.vue').default);
 Vue.component('select2', require('./componentes/select2.vue').default);
