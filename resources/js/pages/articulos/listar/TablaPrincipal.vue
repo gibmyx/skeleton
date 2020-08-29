@@ -45,15 +45,15 @@
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page > 1"
-                               @click.prevent="cambiarPagina(pagination.current_page - 1 )">Ant</a>
+                               @click.prevent="cambiarPagina({page: pagination.current_page - 1, entity: this})">Ant</a>
                         </li>
                         <li class="page-item" v-for="page in pagesNumber" :key="page"
                             :class="page == isActived ? 'active' : ''">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina({page: page, entity: this})" v-text="page"></a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page"
-                               @click.prevent="cambiarPagina(pagination.current_page + 1 )">Sig</a>
+                               @click.prevent="cambiarPagina({page: pagination.current_page + 1, entity: this})">Sig</a>
                         </li>
                     </ul>
                 </nav>
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+    import {mapGetters, mapActions, mapState} from 'vuex';
     import ModalEstado from "./../modal/ModalEstado";
     import Fila from "./Fila";
     import qs from 'qs';
@@ -82,46 +83,12 @@
                 params: params(),
                 articulos: [],
                 loding: true,
-
-                pagination: {
-                    'total': 0,
-                    'current_page': 0,
-                    'per_page': 0,
-                    'last_page': 0,
-                    'from': 0,
-                    'to': 0,
-                },
-                offset: 1
             }
         },
 
         computed: {
-            isActived: function () {
-                return this.pagination.current_page;
-            },
-
-            pagesNumber: function () {
-                if (!this.pagination.to) {
-                    return [];
-                }
-
-                let from = this.pagination.current_page - this.offset;
-                if (from < 1) {
-                    from = 1;
-                }
-
-                let to = from + (this.offset * 2);
-                if (to >= this.pagination.last_page) {
-                    to = this.pagination.last_page;
-                }
-
-                let pagesArray = [];
-                while (from <= to) {
-                    pagesArray.push(from);
-                    from++;
-                }
-                return pagesArray;
-            },
+            ...mapGetters(['isActived', 'pagesNumber']),
+            ...mapState(['pagination']),
         },
 
         mounted() {
@@ -136,6 +103,9 @@
         // },
 
         methods: {
+            ...mapActions(['cambiarPagina', 'setPagination']),
+
+
             Listar(page = 1, params = []){
                 let param = {
                     params: params,
@@ -143,16 +113,11 @@
                 this.loding = false;
                 axios.get('/api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.articulos = response.data.articulos;
-                    this.pagination = response.data.pagination;
+                    this.setPagination(response.data.pagination);
                     this.loding = true;
                 });
             },
 
-            cambiarPagina(page) {
-                let me = this;
-                me.pagination.current_page = page;
-                me.Listar(page, this.params)
-            },
 
             IrFormularioCrear() {
                 this.$router.push({name: 'articulos_crear'})
