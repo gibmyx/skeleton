@@ -6,17 +6,29 @@ export default [
     {
         path: '/articulos',
         name: 'articulos',
-        component: Listar
+        component: Listar,
+        meta: {
+            title: 'Dashboard',
+            requiresAuth: true,
+        }
     },
     {
         path: '/articulos/crear',
         name: 'articulos_crear',
-        component: Crear
+        component: Crear,
+        meta: {
+            title: 'Dashboard',
+            requiresAuth: true,
+        }
     },
     {
         path: '/articulos/ver/:uuid',
         name: 'articulos_ver',
         component: Ver,
-        props: true
+        props: true,
+        meta: {
+            title: 'Dashboard',
+            requiresAuth: true,
+        }
     },
 ];

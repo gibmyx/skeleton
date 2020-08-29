@@ -1,11 +1,11 @@
-import Listar from "./../Listar";
+import Listar from "./../Listar"
 import Crear from "./../Crear";
 import Ver from "./../Ver";
 
 export default [
     {
-        path: '/categorias',
-        name: 'categorias',
+        path: '/proveedores',
+        name: 'proveedores',
         component: Listar,
         meta: {
             title: 'Dashboard',
@@ -13,8 +13,8 @@ export default [
         }
     },
     {
-        path: '/categorias/crear',
-        name: 'categorias_crear',
+        path: '/proveedores/crear',
+        name: 'proveedores_crear',
         component: Crear,
         meta: {
             title: 'Dashboard',
@@ -22,8 +22,8 @@ export default [
         }
     },
     {
-        path: '/categorias/ver/:uuid',
-        name: 'categorias_ver',
+        path: '/proveedores/ver/:uuid',
+        name: 'proveedores_ver',
         component: Ver,
         props: true,
         meta: {

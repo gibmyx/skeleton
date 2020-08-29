@@ -46,16 +46,16 @@ export default {
     methods: {
         listarArticulo() {
             let data = this.params;
-            this.$root.$emit('Buscar', data);
+            // this.$root.$emit('Buscar', data);
         },
         LimpiarBusqueda() {
             this.params = params();
-            this.$root.$emit('Buscar', this.params);
+            // this.$root.$emit('Buscar', this.params);
         }
     },
-    beforeDestroy: function () {
-        this.$root.$off('Buscar')
-    },
+    // beforeDestroy: function () {
+    //     this.$root.$off('Buscar')
+    // },
 }
 </script>
 

@@ -4,8 +4,8 @@
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Artículos
-                <button type="button" class="btn btn-secondary" @click.prevent="IrFormularioCrear">
-                    <i class="icon-plus"></i>&nbsp;Nuevoe ser
+                <button type="button" class="btn btn-secondary" @click.prevent="IrFormularioCrear()">
+                    <i class="icon-plus"></i>&nbsp;Nuevo
                 </button>
             </div>
             <div class="card-body">
@@ -22,10 +22,10 @@
                         <th width="10%" class="text-center">Estado</th>
                     </tr>
                     </thead>
-                    <tbody v-if="articulos.length >= 1 && loding">
+                    <tbody v-if="proveedores.length >= 1">
                     <tr
                         v-bind:is="'fila'"
-                        v-for="o in articulos"
+                        v-for="o in proveedores"
                         :o="o"
                         v-on:changeState="ModalchangeState($event)"
                         :key="o.id">
@@ -80,8 +80,7 @@
         data () {
             return {
                 params: params(),
-                articulos: [],
-                loding: true,
+                proveedores: [],
 
                 pagination: {
                     'total': 0,
@@ -140,11 +139,9 @@
                 let param = {
                     params: params,
                 };
-                this.loding = false;
-                axios.get('/api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
-                    this.articulos = response.data.articulos;
+                axios.get('/api/proveedores/ajax_listar_proveedores?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
+                    this.proveedores = response.data.proveedores;
                     this.pagination = response.data.pagination;
-                    this.loding = true;
                 });
             },
 
@@ -155,7 +152,7 @@
             },
 
             IrFormularioCrear() {
-                this.$router.push({name: 'articulos_crear'})
+                this.$router.push({name: 'proveedores_crear'})
             },
 
             ModalchangeState(detalle) {

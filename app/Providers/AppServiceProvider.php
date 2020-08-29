@@ -8,6 +8,8 @@ use Skeleton\App\Articulos\Domain\Repository\ArticuloRepository;
 use Skeleton\App\Articulos\Infrastructure\Eloquent\ArticuloEloquentRepository;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
 use Skeleton\App\Categorias\Infrastructure\Eloquent\CategoriaEloquentRepository;
+use Skeleton\App\Proveedores\Domain\Repository\ProveedorRepository;
+use Skeleton\App\Proveedores\Infrastructure\Eloquent\ProveedorEloquentRepository;
 use Skeleton\Shared\Application\Container\Contracts\Container;
 use Skeleton\Shared\Application\Container\LaravelContainer;
 
@@ -52,6 +54,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CategoriaRepository::class,
             CategoriaEloquentRepository::class
+        );
+
+
+        $this->app->bind(
+            ProveedorRepository::class,
+            ProveedorEloquentRepository::class
         );
 
         $this->app->bind(

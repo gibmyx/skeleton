@@ -1,5 +1,6 @@
 import VueRouter from "vue-router";
 import Vue from 'vue';
+import store from "../stores";
 Vue.use(VueRouter);
 
 
@@ -7,17 +8,18 @@ Vue.use(VueRouter);
 import not404 from "../componentes/NotFound";
 import login from  "./../pages/login/router";
 import dashboard from  "./../pages/dashboard/router";
-import store from "../stores";
 import articulos from "./../pages/articulos/router";
-import categorias from "./../pages/categorias/router";
+// import categorias from "./../pages/categorias/router";
+// import proveedores from "./../pages/proveedores/router";
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         ...login,
         ...dashboard,
-        ...categorias,
         ...articulos,
+        // ...categorias,
+        // ...proveedores,
         //mensaje 404
         {
             path: '*',

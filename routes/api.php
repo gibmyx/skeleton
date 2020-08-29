@@ -18,6 +18,7 @@ require base_path('/src/App/Usuarios/Infrastructure/Routes/routes.php');
 require base_path('/src/App/Authorization/Infrastructure/Routes/routes.php');
 require base_path('/src/App/Articulos/Infrastructure/Routes/routes.php');
 require base_path('/src/App/Categorias/Infrastructure/Routes/routes.php');
+require base_path('/src/App/Proveedores/Infrastructure/Routes/routes.php');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
