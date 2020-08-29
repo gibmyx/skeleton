@@ -126,9 +126,9 @@
 
         mounted() {
             this.Listar(1, this.params);
-            // this.$root.$on('Buscar', data => {
-            //     this.Listar(1, data);
-            // });
+            this.$root.$on('Buscar', data => {
+                this.Listar(1, data);
+            });
         },
 
         // beforeDestroy: function () {
