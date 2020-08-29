@@ -41,28 +41,13 @@
                     </tr>
                     </tbody>
                 </table>
-                <nav class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" v-if="pagination.current_page > 1"
-                               @click.prevent="cambiar(pagination.current_page - 1)">Ant</a>
-                        </li>
-                        <li class="page-item" v-for="page in pagesNumber" :key="page"
-                            :class="page == isActived ? 'active' : ''">
-                            <a class="page-link" href="#" @click.prevent="cambiar(page)" v-text="page"></a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page"
-                               @click.prevent="cambiar(pagination.current_page + 1)">Sig</a>
-                        </li>
-                    </ul>
-                </nav>
+                <pagination ref="paginacion" :params="params" v-on:listar="listar($event, params)"></pagination>
             </div>
         </div>
         <!-- Fin ejemplo de tabla Listado -->
 
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:Listar="Listar(pagination.current_page, params)"
+        <modal-estado :name="'ModalEstado'" v-on:listar="listar(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
@@ -73,8 +58,7 @@
     import Fila from "./Fila";
     import qs from 'qs';
     import params from "../data/params";
-    import {mapActions, mapGetters, mapState} from "vuex";
-    import paginacion from "../../../componentes/data/paginacion";
+    import Pagination from "../../../componentes/Pagination";
 
     export default {
         name: "TablaPrincipal",
@@ -86,35 +70,21 @@
             }
         },
 
-        computed: {
-            ...mapGetters(['isActived', 'pagesNumber']),
-            ...mapState(['pagination']),
-        },
-
         mounted() {
-            this.setPagination(paginacion());
-            this.Listar(1, this.params);
+            this.listar(1, this.params);
             this.$root.$on('Buscar', data => {
-                this.Listar(1, data);
+                this.listar(1, data);
             });
         },
 
         methods: {
-            ...mapActions(['cambiarPagina', 'setPagination']),
-
-            Listar(page = 1, params = []){
+            listar(page = 1, params = []){
                 let param = {
                     params: params,
                 };
                 axios.get('/api/proveedores/ajax_listar_proveedores?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.proveedores = response.data.proveedores;
-                    this.setPagination(response.data.pagination);
-                });
-            },
-
-            cambiar(page) {
-                this.cambiarPagina(page).then(() => {
-                    this.Listar(page, this.params);
+                    this.$refs.paginacion.setPaginacion(response.data.pagination);
                 });
             },
 
@@ -130,6 +100,7 @@
         components: {
             ModalEstado,
             Fila,
+            Pagination,
         },
     }
 </script>

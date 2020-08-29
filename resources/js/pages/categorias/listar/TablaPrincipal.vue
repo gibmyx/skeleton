@@ -38,80 +38,67 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <pagination ref="paginacion" :params="params" v-on:listar="listar($event, params)"></pagination>
             </div>
         </div>
 
         <!--Modal de eliminar categoria-->
-        <modal-estado :name="'ModalEstado'" v-on:Listar="Listar(pagination.current_page, params)"
+        <modal-estado :name="'ModalEstado'" v-on:listar="listar(pagination.current_page, params)"
                       ref="modalestado"></modal-estado>
     </div>
 
 </template>
 
 <script>
-import Fila from "./Fila";
-import ModalEstado from "./../modal/ModalEstado";
-import qs from 'qs';
-import params from "../../articulos/data/params";
-import {mapGetters, mapActions, mapState} from 'vuex';
-import paginacion from "../../../componentes/data/paginacion";
+    import Fila from "./Fila";
+    import ModalEstado from "./../modal/ModalEstado";
+    import qs from 'qs';
+    import params from "../../articulos/data/params";
+    import Pagination from "../../../componentes/Pagination";
 
-export default {
-    name: "Categorias",
+    export default {
+        name: "Categorias",
 
-    data() {
-        return {
-            params: params(),
-            categorias: [],
-        }
-    },
+        data() {
+            return {
+                params: params(),
+                categorias: [],
+            }
+        },
 
-    computed: {
-        ...mapGetters(['isActived', 'pagesNumber']),
-        ...mapState(['pagination']),
-    },
-
-    mounted() {
-        this.setPagination(paginacion());
-        this.Listar(1, this.params);
-        this.$root.$on('Buscar', data => {
-            this.Listar(1, data);
-        });
-    },
-
-    methods: {
-        ...mapActions(['cambiarPagina', 'setPagination']),
-
-        Listar(page = 1, params = []) {
-            let param = {
-                params: params,
-            };
-            axios.get('/api/categorias/ajax_listar_categorias?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
-                this.categorias = response.data.categorias;
-                this.setPagination(response.data.pagination);
+        mounted() {
+            this.listar(1, this.params);
+            this.$root.$on('Buscar', data => {
+                this.listar(1, data);
             });
         },
 
-        cambiar(page) {
-            this.cambiarPagina(page).then(() => {
-                this.Listar(page, this.params);
-            });
+        methods: {
+
+            listar(page = 1, params = []) {
+                let param = {
+                    params: params,
+                };
+                axios.get('/api/categorias/ajax_listar_categorias?page=' + page + '&' + qs.stringify(param)).then((response) => {
+                    this.categorias = response.data.categorias;
+                    this.$refs.paginacion.setPaginacion(response.data.pagination);
+                });
+            },
+
+            IrFormularioCrear() {
+                this.$router.push({name: 'categorias_crear'})
+            },
+
+            ModalchangeState(detalle = null) {
+                this.$refs.modalestado.show(detalle);
+            },
         },
 
-        IrFormularioCrear() {
-            this.$router.push({name: 'categorias_crear'})
+        components: {
+            Fila,
+            ModalEstado,
+            Pagination,
         },
-
-        ModalchangeState(detalle = null) {
-            this.$refs.modalestado.show(detalle);
-        },
-    },
-
-    components: {
-        Fila,
-        ModalEstado,
-    },
 }
 </script>
 
