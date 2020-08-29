@@ -1,11 +1,12 @@
 const ActionsListar = {
     cambiarPagina(context, params) {
-        context.commit('ChangerPages', params.page)
-        console.log(params);
-        // params.entity.Listar(params.page, params.entity.params)
+        context.commit('ChangerPages', params.page);
     },
     setPagination(context, params) {
-        context.commit('SetPaginationState', params)
+        return new Promise((resolve, reject) => {
+            context.commit('SetPaginationState', params);
+            resolve
+        });
     }
 }
 

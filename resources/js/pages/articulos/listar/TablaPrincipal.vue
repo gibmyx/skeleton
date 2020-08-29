@@ -45,15 +45,15 @@
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page > 1"
-                               @click.prevent="cambiarPagina({page: pagination.current_page - 1, entity: this})">Ant</a>
+                               @click.prevent="cambiar(pagination.current_page - 1)">Ant</a>
                         </li>
                         <li class="page-item" v-for="page in pagesNumber" :key="page"
                             :class="page == isActived ? 'active' : ''">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina({page: page, entity: this})" v-text="page"></a>
+                            <a class="page-link" href="#" @click.prevent="cambiar(page)" v-text="page"></a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page"
-                               @click.prevent="cambiarPagina({page: pagination.current_page + 1, entity: this})">Sig</a>
+                               @click.prevent="cambiar(pagination.current_page + 1)">Sig</a>
                         </li>
                     </ul>
                 </nav>
@@ -105,6 +105,11 @@
         methods: {
             ...mapActions(['cambiarPagina', 'setPagination']),
 
+            cambiar(page) {
+                this.cambiarPagina(page).then(() => {
+                    this.Listar(page, this.params);
+                });
+            },
 
             Listar(page = 1, params = []){
                 let param = {
