@@ -4,7 +4,7 @@ const MutationsListar = {
     },
     SetPaginationState(state, params) {
         state.pagination = params;
-    }
+    },
 }
 
 export default MutationsListar;

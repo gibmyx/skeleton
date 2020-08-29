@@ -38,22 +38,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <nav class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" v-if="pagination.current_page > 1"
-                               @click.prevent="cambiar(pagination.current_page - 1)">Ant</a>
-                        </li>
-                        <li class="page-item" v-for="page in pagesNumber" :key="page"
-                            :class="page == isActived ? 'active' : ''">
-                            <a class="page-link" href="#" @click.prevent="cambiar(page)" v-text="page"></a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page"
-                               @click.prevent="cambiar(pagination.current_page + 1)">Sig</a>
-                        </li>
-                    </ul>
-                </nav>
+
             </div>
         </div>
 
@@ -70,6 +55,7 @@ import ModalEstado from "./../modal/ModalEstado";
 import qs from 'qs';
 import params from "../../articulos/data/params";
 import {mapGetters, mapActions, mapState} from 'vuex';
+import paginacion from "../../../componentes/data/paginacion";
 
 export default {
     name: "Categorias",
@@ -87,6 +73,7 @@ export default {
     },
 
     mounted() {
+        this.setPagination(paginacion());
         this.Listar(1, this.params);
         this.$root.$on('Buscar', data => {
             this.Listar(1, data);

@@ -74,6 +74,7 @@
     import qs from 'qs';
     import params from "../data/params";
     import {mapActions, mapGetters, mapState} from "vuex";
+    import paginacion from "../../../componentes/data/paginacion";
 
     export default {
         name: "TablaPrincipal",
@@ -91,6 +92,7 @@
         },
 
         mounted() {
+            this.setPagination(paginacion());
             this.Listar(1, this.params);
             this.$root.$on('Buscar', data => {
                 this.Listar(1, data);
@@ -106,7 +108,7 @@
                 };
                 axios.get('/api/proveedores/ajax_listar_proveedores?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.proveedores = response.data.proveedores;
-                    this.pagination = response.data.pagination;
+                    this.setPagination(response.data.pagination);
                 });
             },
 
