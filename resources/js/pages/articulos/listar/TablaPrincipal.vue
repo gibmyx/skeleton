@@ -22,7 +22,7 @@
                         <th width="10%" class="text-center">Estado</th>
                     </tr>
                     </thead>
-                    <tbody v-if="articulos.length >= 1 && loding">
+                    <tbody v-if="articulos.length >= 1">
                     <tr
                         v-bind:is="'fila'"
                         v-for="o in articulos"
@@ -82,7 +82,6 @@
             return {
                 params: params(),
                 articulos: [],
-                loding: true,
             }
         },
 
@@ -98,18 +97,8 @@
             });
         },
 
-        // beforeDestroy: function () {
-        //     this.$root.$off('Buscar')
-        // },
-
         methods: {
             ...mapActions(['cambiarPagina', 'setPagination']),
-
-            cambiar(page) {
-                this.cambiarPagina(page).then(() => {
-                    this.Listar(page, this.params);
-                });
-            },
 
             Listar(page = 1, params = []){
                 let param = {
@@ -119,10 +108,14 @@
                 axios.get('/api/articulos/ajax_listar_articulos?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                     this.articulos = response.data.articulos;
                     this.setPagination(response.data.pagination);
-                    this.loding = true;
                 });
             },
 
+            cambiar(page) {
+                this.cambiarPagina(page).then(() => {
+                    this.Listar(page, this.params);
+                });
+            },
 
             IrFormularioCrear() {
                 this.$router.push({name: 'articulos_crear'})

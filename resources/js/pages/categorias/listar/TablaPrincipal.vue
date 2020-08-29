@@ -42,15 +42,15 @@
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page > 1"
-                               @click.prevent="cambiarPagina(pagination.current_page - 1 )">Ant</a>
+                               @click.prevent="cambiar(pagination.current_page - 1)">Ant</a>
                         </li>
                         <li class="page-item" v-for="page in pagesNumber" :key="page"
                             :class="page == isActived ? 'active' : ''">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
+                            <a class="page-link" href="#" @click.prevent="cambiar(page)" v-text="page"></a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="#" v-if="pagination.current_page < pagination.last_page"
-                               @click.prevent="cambiarPagina(pagination.current_page + 1 )">Sig</a>
+                               @click.prevent="cambiar(pagination.current_page + 1)">Sig</a>
                         </li>
                     </ul>
                 </nav>
@@ -69,6 +69,7 @@ import Fila from "./Fila";
 import ModalEstado from "./../modal/ModalEstado";
 import qs from 'qs';
 import params from "../../articulos/data/params";
+import {mapGetters, mapActions, mapState} from 'vuex';
 
 export default {
     name: "Categorias",
@@ -76,53 +77,13 @@ export default {
     data() {
         return {
             params: params(),
-
-            opcion: 'nombre',
-            texto: '',
             categorias: [],
-
-            pagination: {
-                'total': 0,
-                'current_page': 0,
-                'per_page': 0,
-                'last_page': 0,
-                'from': 0,
-                'to': 0,
-            },
-            offset: 1
         }
     },
 
     computed: {
-
-        isActived: function () {
-            return this.pagination.current_page;
-        },
-
-        pagesNumber: function () {
-            if (!this.pagination.to) {
-                return [];
-            }
-
-            let from = this.pagination.current_page - this.offset;
-            if (from < 1) {
-                from = 1;
-            }
-
-            let to = from + (this.offset * 2);
-            if (to >= this.pagination.last_page) {
-                to = this.pagination.last_page;
-            }
-
-            let pagesArray = [];
-            while (from <= to) {
-                pagesArray.push(from);
-                from++;
-            }
-            return pagesArray;
-        },
-
-
+        ...mapGetters(['isActived', 'pagesNumber']),
+        ...mapState(['pagination']),
     },
 
     mounted() {
@@ -133,23 +94,28 @@ export default {
     },
 
     methods: {
+        ...mapActions(['cambiarPagina', 'setPagination']),
+
         Listar(page = 1, params = []) {
             let param = {
                 params: params,
             };
             axios.get('/api/categorias/ajax_listar_categorias?page=' + page + '&'+ qs.stringify(param) ).then((response) => {
                 this.categorias = response.data.categorias;
-                this.pagination = response.data.pagination;
+                this.setPagination(response.data.pagination);
             });
         },
-        cambiarPagina(page) {
-            let me = this;
-            me.pagination.current_page = page;
-            me.Listar(page, this.params)
+
+        cambiar(page) {
+            this.cambiarPagina(page).then(() => {
+                this.Listar(page, this.params);
+            });
         },
+
         IrFormularioCrear() {
             this.$router.push({name: 'categorias_crear'})
         },
+
         ModalchangeState(detalle = null) {
             this.$refs.modalestado.show(detalle);
         },
