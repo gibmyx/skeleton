@@ -1,6 +1,6 @@
-import * as types from './mutation-types';
-import qs from  'qs';
+import actionsLogin from "./actions/ActionsLogin";
 
-export const setEstadoInicial = ({commit}, value) => {
-    commit(types.SET_ESTADO_INICIAL, value);
-};
+const actions = {
+   ...actionsLogin,
+}
+export default actions;

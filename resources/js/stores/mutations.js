@@ -1,7 +1,14 @@
-import * as types from './mutation-types';
+import MutationsLogin from "./mutations/MutationsLogin";
 
-export default {
-    [types.GET_BREADCRUMBS](state, params) {
-        state.breadcrumbs = params;
-    },
-};
+const mutations = {
+    ...MutationsLogin
+}
+export default mutations;
+
+// import * as types from './mutation-types';
+//
+// export default {
+//     [types.GET_BREADCRUMBS](state, params) {
+//         state.breadcrumbs = params;
+//     },
+// };
