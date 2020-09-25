@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 return [
 
     /*
@@ -66,8 +68,10 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'doctrine',
-            'model' => Skeleton\App\Authorization\Domain\Entities\User::class,
+            'driver' => 'eloquent',
+//            'driver' => 'doctrine',
+            'model' => User::class,
+//            'model' => Skeleton\App\Authorization\Domain\Entities\User::class,
         ],
 
         // 'users' => [

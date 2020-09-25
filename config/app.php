@@ -233,9 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         //other package
-        'ityManager'    => LaravelDoctrine\ORM\Facades\EntityManager::class,
-        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
-        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+//        'ityManager'    => LaravelDoctrine\ORM\Facades\EntityManager::class,
+//        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
+//        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
 
     ],
 
