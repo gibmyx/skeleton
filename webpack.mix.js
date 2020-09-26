@@ -24,4 +24,5 @@ mix.styles([
         'resources/plantilla/js/Chart.min.js',
         'resources/plantilla/js/template.js',
     ], 'public/js/plantilla.js')
-    .js(['resources/js/app.js'], 'public/js/app.js');
+    .js(['resources/js/app.js'], 'public/js/app.js')
+    .js(['resources/js/passport.js'], 'public/js/passport.js');

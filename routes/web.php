@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/passport', function (){
+    return view('passport');
+});
+
 Route::get('/{any?}', function (){
     return view('app');
 })->where('any', '^(?!api\/)[\/\w\.-]*');

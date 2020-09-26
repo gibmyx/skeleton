@@ -7,7 +7,7 @@ namespace Skeleton\App\Usuarios\Infrastructure\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Skeleton\Share\Domain\Bus\CommandBus;
+use Skeleton\Shared\Domain\Bus\CommandBus;
 use Skeleton\App\Usuarios\Application\Command\CrearUsuarioCommand;
 
 class CrearUsuarioController extends Controller

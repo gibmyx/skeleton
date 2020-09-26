@@ -71,7 +71,7 @@ return [
 //            'driver' => 'eloquent',
 //            'model' => User::class,
             'driver' => 'doctrine',
-            'model' => Skeleton\App\Authorization\Domain\Entities\User::class,
+            'model' => App\Entities\User::class,
         ],
 
         // 'users' => [

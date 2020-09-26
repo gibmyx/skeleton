@@ -13,10 +13,9 @@ class CrearUsuarioHandler implements Hendler
     private $repository;
     private $crearUsuarioValidation;
 
-    public function __construct(UsuarioRepository $repository, CrearUsuarioValidation $crearUsuarioValidation)
+    public function __construct(UsuarioRepository $repository)
     {
         $this->repository = $repository;
-        $this->crearUsuarioValidation = $crearUsuarioValidation;
     }
 
     public function __invoke(Command $command)
