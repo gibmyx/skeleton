@@ -88,7 +88,6 @@
 <script>
 import VueBarcode from 'vue-barcode';
 import QrcodeVue from "qrcode.vue";
-import 'vue-select/dist/vue-select.css';
 import { required, minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {

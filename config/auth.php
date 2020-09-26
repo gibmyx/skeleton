@@ -68,10 +68,10 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-//            'driver' => 'doctrine',
-            'model' => User::class,
-//            'model' => Skeleton\App\Authorization\Domain\Entities\User::class,
+//            'driver' => 'eloquent',
+//            'model' => User::class,
+            'driver' => 'doctrine',
+            'model' => Skeleton\App\Authorization\Domain\Entities\User::class,
         ],
 
         // 'users' => [

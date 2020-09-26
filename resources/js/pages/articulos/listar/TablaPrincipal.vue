@@ -5,7 +5,7 @@
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Artículos
                 <button type="button" class="btn btn-secondary" @click.prevent="IrFormularioCrear">
-                    <i class="icon-plus"></i>&nbsp;Nuevoe ser
+                    <i class="icon-plus"></i>Nuevo
                 </button>
             </div>
             <div class="card-body">

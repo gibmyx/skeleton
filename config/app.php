@@ -156,8 +156,8 @@ return [
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
         Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-//        \LaravelDoctrine\ORM\Auth\Passwords\PasswordResetServiceProvider::class,
+//        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        \LaravelDoctrine\ORM\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
@@ -177,10 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         //Doctrine package
-//        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
-//        LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
-//        LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class,
-//        LaravelDoctrine\Extensions\BeberleiExtensionsServiceProvider::class,
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+        LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
+        LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class,
+        LaravelDoctrine\Extensions\BeberleiExtensionsServiceProvider::class,
     ],
 
     /*
@@ -233,9 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         //other package
-//        'ityManager'    => LaravelDoctrine\ORM\Facades\EntityManager::class,
-//        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
-//        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+        'ityManager'    => LaravelDoctrine\ORM\Facades\EntityManager::class,
+        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
+        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
 
     ],
 

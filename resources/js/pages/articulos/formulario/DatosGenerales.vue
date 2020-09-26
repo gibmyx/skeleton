@@ -9,7 +9,8 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Nombre <span style="color: red">*</span></label>
                     <input type="text" name="Nombre" class="form-control" id="Nombre" v-model="nombre"/>
-                    <label class="mt-2" style="color: red" v-show="!$v.nombre.required&& submitStatus">El nombre es requerido </label>
+                    <label class="mt-2" style="color: red" v-show="!$v.nombre.required&& submitStatus">El nombre es
+                        requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -24,7 +25,8 @@
                             :precision="2"
                         ></vue-numeric>
                     </div>
-                    <label class="mt-2" style="color: red" v-show="!$v.precio_venta.required&& submitStatus">El precio de venta es requerido </label>
+                    <label class="mt-2" style="color: red" v-show="!$v.precio_venta.required&& submitStatus">El precio
+                        de venta es requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -39,8 +41,11 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Codigo <span style="color: red">*</span></label>
                     <input type="text" name="Codigo" class="form-control" id="Codigo" v-model="codigo"/>
-                    <label class="mt-2" style="color: red" v-show="!$v.codigo.required && submitStatus">El Codigo es requerido </label>
-                    <label class="mt-2" style="color: red" v-show="(!$v.codigo.minLength || !$v.codigo.maxLength) &&  submitStatus">El codigo debe tener entre 8 - 10 caracteres </label>
+                    <label class="mt-2" style="color: red" v-show="!$v.codigo.required && submitStatus">El Codigo es
+                        requerido </label>
+                    <label class="mt-2" style="color: red"
+                           v-show="(!$v.codigo.minLength || !$v.codigo.maxLength) &&  submitStatus">El codigo debe tener
+                        entre 8 - 10 caracteres </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -55,17 +60,20 @@
                             v-model="stock"
                         ></vue-numeric>
                     </div>
-                    <label class="mt-2" style="color: red" v-show="!$v.stock.required && submitStatus">El Stock es requerido </label>
+                    <label class="mt-2" style="color: red" v-show="!$v.stock.required && submitStatus">El Stock es
+                        requerido </label>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <label>Categoria <span style="color: red">*</span></label>
-                    <select-2 class="form-control" name="Estado" required="" :config="{}" :attr="{}" v-model="categoria_id">
+                    <select class="form-control" name="Estado" required="" :config="{}" :attr="{}"
+                              v-model="categoria_id">
                         <option value="">Seleccione</option>
                         <option :value="termino_pago.id" v-for="termino_pago in catalogos.categorias"
                                 v-html="termino_pago.text"></option>
-                    </select-2>
-                    <label class="mt-2" style="color: red" v-show="!$v.categoria_id.required&& submitStatus">La Categoria es requerido </label>
+                    </select>
+                    <label class="mt-2" style="color: red" v-show="!$v.categoria_id.required&& submitStatus">La
+                        Categoria es requerido </label>
                 </div>
             </div>
 
@@ -76,11 +84,11 @@
                     </barcode>
                 </div>
             </div>
-<!--            <div class="form-group row">-->
-<!--                <div class="col-md-auto">-->
-<!--                    <qrcode-vue :value="json" :size="size" level="H"></qrcode-vue>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="form-group row">-->
+            <!--                <div class="col-md-auto">-->
+            <!--                    <qrcode-vue :value="json" :size="size" level="H"></qrcode-vue>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </div>
 </template>
@@ -88,8 +96,7 @@
 <script>
 import VueBarcode from 'vue-barcode';
 import QrcodeVue from "qrcode.vue";
-import 'vue-select/dist/vue-select.css';
-import { required, minLength, maxLength } from 'vuelidate/lib/validators';
+import {required, minLength, maxLength} from 'vuelidate/lib/validators';
 
 export default {
     name: "DatosGenerales",
@@ -112,7 +119,7 @@ export default {
                 {id: '2', text: 'Laptos'},
                 {id: '3', text: 'Alimentos'},
                 {id: '4', text: 'Cocina'},
-                ],
+            ],
             json: '',
         }
     },
@@ -140,7 +147,7 @@ export default {
     methods: {
         Validation() {
             this.$v.$touch();
-            return this.validation = this.$v.$invalid ?  true :  false;
+            return this.validation = this.$v.$invalid ? true : false;
         }
     },
 

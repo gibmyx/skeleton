@@ -25,10 +25,18 @@ return [
             'dev'           => env('APP_DEBUG', false),
             'meta'          => env('DOCTRINE_METADATA', 'annotations'),
             'connection'    => env('DB_CONNECTION', 'mysql'),
-            'namespaces'    => [],
-            'paths'         => [
-                base_path('src/App/Authorization/Domain/Entities')
+            'namespaces' => [
+                'App\Entities'
             ],
+            'paths' => [
+                base_path('app/Entities')
+            ],
+//            'namespaces'    => [
+//                'src/App/Authorization/Domain/Entities'
+//            ],
+//            'paths'         => [
+//                base_path('src/App/Authorization/Domain/Entities')
+//            ],
             'repository'    => Doctrine\ORM\EntityRepository::class,
             'proxies'       => [
                 'namespace'     => false,

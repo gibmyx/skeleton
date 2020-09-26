@@ -9,7 +9,6 @@ import VueResource from 'vue-resource';
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vuelidate from 'vuelidate';
 import VueNumeric from 'vue-numeric';
-import Select2 from 'v-select2-component';
 
 window.Vue = require('vue');
 window.tkn = document.head.querySelector('meta[name="csrf-token"]').content;

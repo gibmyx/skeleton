@@ -30,11 +30,9 @@
     "dependencies": {
         "bootstrap-vue": "^2.15.0",
         "cxlt-vue2-toastr": "^1.1.1",
-        "ldx-vue-select2": "^0.2.4",
         "qrcode.vue": "^1.7.0",
         "sweetalert2": "^9.14.4",
         "uuid": "^3.4.0",
-        "v-select2-component": "^0.4.3",
         "vue-barcode": "^1.2.0",
         "vue-numeric": "^2.3.0",
         "vue-resource": "^1.5.1",
