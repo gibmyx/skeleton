@@ -9,9 +9,9 @@ use Skeleton\Shared\Application\Command\Command;
 
 interface CategoriaRepository
 {
-    public function save(Categoria $categoria) : void;
-    public function FindUuid(string $categoria) : Categoria;
-    public function FindId(string $entity) : Categoria;
-    public function update(CategoriaEntity $entity) : void;
-    public function searchList(Command $command): LengthAwarePaginator;
+    public function save(Categoria $categoria);
+
+    public function FindUuid(string $categoria): ?Categoria;
+
+    public function update(Categoria $categoria): void;
 }

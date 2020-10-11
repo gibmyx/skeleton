@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-
 namespace Skeleton\App\Categorias\Application\UseCases;
-
 
 use Skeleton\App\Categorias\Domain\Entities\Categoria;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
 use Skeleton\Shared\Application\Command\Command;
 
-final class CrearCategoriaUserCases
+final class GetCategoriaUserCases
 {
     private $repository;
 
@@ -19,16 +17,8 @@ final class CrearCategoriaUserCases
         $this->repository = $repository;
     }
 
-    public function __invoke(Command $command)
+    public function __invoke(Command $command): ?Categoria
     {
-        $categoria = Categoria::take(
-            $command->Uuid(),
-            $command->Nombre(),
-            $command->Descripcion(),
-            $command->Estado()
-        );
-
-        $this->repository->save($categoria);
+        return $this->repository->FindUuid($command->Uuid());
     }
-
 }

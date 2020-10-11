@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace Skeleton\App\Categorias\Infrastructure\Doctrine;
 
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Skeleton\App\Categorias\Domain\Entities\Categoria;
@@ -16,29 +18,26 @@ use Skeleton\Shared\Application\Command\Command;
 final class CategoriaDoctrineRepository implements CategoriaRepository
 {
 
+    private $genericRepository;
+
+    public function __construct(ObjectRepository $genericRepository)
+    {
+        $this->genericRepository = $genericRepository;
+    }
+
     public function save(Categoria $categoria): void
     {
         EntityManager::persist($categoria);
         EntityManager::flush();
     }
 
-    public function FindUuid(string $entity): Categoria
+    public function FindUuid(string $uuid): ?Categoria
     {
-        // TODO: Implement FindUuid() method.
+        return $this->genericRepository->findOneBy(['uuid' => $uuid]);
     }
 
-    public function FindId(string $entity): Categoria
-    {
-        // TODO: Implement FindId() method.
-    }
-
-    public function update(CategoriaEntity $entity): void
+    public function update(Categoria $categoria): void
     {
         // TODO: Implement update() method.
-    }
-
-    public function searchList(Command $command): LengthAwarePaginator
-    {
-        // TODO: Implement searchList() method.
     }
 }

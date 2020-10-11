@@ -4,6 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use LaravelDoctrine\ORM\Facades\EntityManager;
+use Skeleton\App\Categorias\Application\UseCases\GetCategoriaUserCases;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Skeleton\App\Categorias\Domain\Entities\Categoria;
+use Skeleton\App\Categorias\Infrastructure\Doctrine\CategoriaDoctrineRepository;
+
 use Skeleton\App\Articulos\Domain\Repository\ArticuloRepository;
 use Skeleton\App\Articulos\Infrastructure\Eloquent\ArticuloEloquentRepository;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
@@ -31,6 +37,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        $this->app->bind(CategoriaRepository::class, function(){
+            return new CategoriaDoctrineRepository(
+                EntityManager::getRepository(Categoria::class)
+            );
+        });
+
         $this->app->bind(
             CommandBus::class,
             SimpleCommandBus::class
@@ -51,10 +64,10 @@ class AppServiceProvider extends ServiceProvider
             ArticuloEloquentRepository::class
         );
 
-        $this->app->bind(
-            CategoriaRepository::class,
-            CategoriaEloquentRepository::class
-        );
+//        $this->app->bind(
+//            CategoriaRepository::class,
+//            CategoriaEloquentRepository::class
+//        );
 
 
         $this->app->bind(
