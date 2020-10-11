@@ -15,6 +15,8 @@ Route::get('/passport', function (){
     return view('passport');
 });
 
+require base_path('/src/App/Articulos/Infrastructure/Routes/routesWeb.php');
+
 Route::get('/{any?}', function (){
     return view('app');
 })->where('any', '^(?!api\/)[\/\w\.-]*');

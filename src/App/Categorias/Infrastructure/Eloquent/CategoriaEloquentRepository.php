@@ -8,7 +8,7 @@ use Skeleton\App\Categorias\Domain\Entity\CategoriaEntity;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
 use Skeleton\Shared\Application\Command\Command;
 
-class CategoriaEloquentRepository implements CategoriaRepository
+class CategoriaEloquentRepository
 {
     private $model;
 

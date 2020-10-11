@@ -68,10 +68,10 @@ return [
 
     'providers' => [
         'users' => [
-//            'driver' => 'eloquent',
-//            'model' => User::class,
-            'driver' => 'doctrine',
-            'model' => App\Entities\User::class,
+            'driver' => 'eloquent',
+            'model' => User::class,
+//            'driver' => 'doctrine',
+//            'model' => App\Entities\User::class,
         ],
 
         // 'users' => [
