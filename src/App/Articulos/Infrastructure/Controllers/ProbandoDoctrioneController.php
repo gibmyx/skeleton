@@ -8,8 +8,6 @@ use Skeleton\App\Categorias\Application\UseCases\CrearCategoriaUserCases;
 use Skeleton\App\Categorias\Application\Command\CategoriaCommand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use LaravelDoctrine\ORM\Facades\EntityManager;
-use Skeleton\App\Articulos\Domain\Entities\Categoria;
 use Webpatser\Uuid\Uuid;
 
 class ProbandoDoctrioneController extends Controller

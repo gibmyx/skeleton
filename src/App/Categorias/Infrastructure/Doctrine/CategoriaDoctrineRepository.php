@@ -8,7 +8,7 @@ namespace Skeleton\App\Categorias\Infrastructure\Doctrine;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use LaravelDoctrine\ORM\Facades\EntityManager;
-use Skeleton\App\Articulos\Domain\Entities\Categoria;
+use Skeleton\App\Categorias\Domain\Entities\Categoria;
 use Skeleton\App\Categorias\Domain\Entity\CategoriaEntity;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
 use Skeleton\Shared\Application\Command\Command;

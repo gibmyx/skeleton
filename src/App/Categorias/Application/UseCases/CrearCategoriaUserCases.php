@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Skeleton\App\Categorias\Application\UseCases;
 
 
-use Skeleton\App\Articulos\Domain\Entities\Categoria;
+use Skeleton\App\Categorias\Domain\Entities\Categoria;
 use Skeleton\App\Categorias\Infrastructure\Doctrine\CategoriaDoctrineRepository;
 use Skeleton\Shared\Application\Command\Command;
 
@@ -27,7 +27,7 @@ final class CrearCategoriaUserCases
             $command->Descripcion(),
             $command->Estado()
         );
-        
+
         $this->repository->save($categoria);
     }
 

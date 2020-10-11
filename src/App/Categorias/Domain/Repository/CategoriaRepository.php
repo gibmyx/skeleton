@@ -3,7 +3,7 @@
 namespace Skeleton\App\Categorias\Domain\Repository;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use Skeleton\App\Articulos\Domain\Entities\Categoria;
+use Skeleton\App\Categorias\Domain\Entities\Categoria;
 use Skeleton\App\Categorias\Domain\Entity\CategoriaEntity;
 use Skeleton\Shared\Application\Command\Command;
 

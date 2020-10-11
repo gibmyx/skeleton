@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Skeleton\App\Articulos\Domain\Entities;
+namespace Skeleton\App\Categorias\Domain\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
