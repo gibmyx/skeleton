@@ -17,8 +17,21 @@ final class GetCategoriaUserCases
         $this->repository = $repository;
     }
 
-    public function __invoke(Command $command): ?Categoria
+    public function __invoke(Command $command): ?array
     {
-        return $this->repository->FindUuid($command->Uuid());
+        $categoria = $this->repository->FindUuid($command->Uuid());
+
+        if (is_null($categoria))
+            return [];
+
+        return [
+            'id' => $categoria->getId(),
+            'uuid' => $categoria->getUuid(),
+            'estado' => $categoria->getEstado(),
+            'nombre' => $categoria->getNombre(),
+            'descripcion' => $categoria->getDescripcion(),
+            'created_at' => $categoria->getCreatedAt(),
+            'updated_at' => $categoria->getUpdatedAt(),
+        ];
     }
 }

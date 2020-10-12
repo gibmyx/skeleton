@@ -38,7 +38,7 @@ class ProbandoDoctrioneController extends Controller
 //        Actualizar
         $categoria = null;
         $categoria2Command = CategoriaCommand::take(
-            '889449f0-0bdc-11eb-b2ff-5b6c7bb1ae7f',
+            '30ce1b55-325a-454d-aabb-b1d24254b758',
             '',
             '',
             ''

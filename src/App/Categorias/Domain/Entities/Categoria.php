@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Skeleton\App\Categorias\Domain\Entities;
 
+use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,17 +41,29 @@ final class Categoria
      */
     private $estado;
 
-    private function __construct($uuid, $nombre, $descripcion, $estado)
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $updated_at;
+
+    private function __construct($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at)
     {
         $this->uuid = $uuid;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->estado = $estado;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
     }
 
-    public static function take ($uuid, $nombre, $descripcion, $estado): self
+    public static function take ($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at): self
     {
-        return new self($uuid, $nombre, $descripcion, $estado);
+        return new self($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at);
     }
 
     /**
@@ -94,6 +107,22 @@ final class Categoria
     }
 
     /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at);
+    }
+
+    /**
      * @param mixed $uuid
      */
     public function setUuid($uuid): void
@@ -123,6 +152,22 @@ final class Categoria
     public function setEstado($estado): void
     {
         $this->estado = $estado;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at): void
+    {
+        $this->updated_at = $updated_at;
     }
 
 }

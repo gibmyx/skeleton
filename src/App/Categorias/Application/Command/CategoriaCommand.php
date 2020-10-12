@@ -16,7 +16,7 @@ final class CategoriaCommand implements Command
     private $descripcion;
     private $estado;
 
-    private function __construct($uuid, $nombre, $descripcion, $estado)
+    private function __construct(string $uuid, string $nombre = '', string $descripcion = '', string $estado = '')
     {
         $this->uuid = $uuid;
         $this->nombre = $nombre;
@@ -24,7 +24,7 @@ final class CategoriaCommand implements Command
         $this->estado = $estado;
     }
 
-    public static function take ($uuid, $nombre, $descripcion, $estado): CategoriaCommand
+    public static function take (string $uuid, string $nombre = '', string $descripcion = '', string $estado = ''): CategoriaCommand
     {
         return new CategoriaCommand($uuid, $nombre, $descripcion, $estado);
     }

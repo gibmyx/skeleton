@@ -13,5 +13,5 @@ interface CategoriaRepository
 
     public function FindUuid(string $categoria): ?Categoria;
 
-    public function update(Categoria $categoria): void;
+    public function update(Command $categoria): void;
 }

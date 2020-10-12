@@ -60,7 +60,7 @@ export default {
                 });
                 return 0;
             }
-            axios.post('/api/categorias/ajax_guardar/'+this.detalle.uuid, {params: this.detalle}).then((response) => {
+            axios.post('/api/categorias/ajax_guardar/'+this.detalle.uuid, {...this.detalle}).then((response) => {
                 let message = response.data.message
                 this.$toast.success({
                     title: 'Éxito',

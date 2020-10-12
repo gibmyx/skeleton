@@ -38,9 +38,17 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        $this->app->bind(CategoriaRepository::class, function(){
+//        $this->app->bind(CategoriaRepository::class, function(){
+//            return new CategoriaDoctrineRepository(
+//                EntityManager::getRepository(Categoria::class)
+//            );
+//        });
+
+        $this->app->bind(CategoriaRepository::class, function($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
             return new CategoriaDoctrineRepository(
-                EntityManager::getRepository(Categoria::class)
+                $app['em'],
+                $app['em']->getClassMetaData(Categoria::class)
             );
         });
 

@@ -7,31 +7,50 @@ declare(strict_types=1);
 namespace Skeleton\App\Categorias\Infrastructure\Controllers;
 
 
-use Skeleton\App\Categorias\Application\Command\CrearCategoriaCommand;
-use Skeleton\App\Categorias\Application\Command\ActualizarCategoriaCommand;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Skeleton\Shared\Domain\Bus\CommandBus;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Skeleton\App\Categorias\Application\Command\CategoriaCommand;
+use Skeleton\App\Categorias\Application\UseCases\CrearCategoriaUserCases;
+use Skeleton\App\Categorias\Application\UseCases\ActualizarCategoriaUserCases;
+
 
 final class GuardarController extends Controller
 {
-    private $comandBus;
+    private $crearUserCases;
+    private $actualizarUserCases;
 
-    public function __construct(CommandBus $commandBus)
+    public function __construct(CrearCategoriaUserCases $crearUserCases, ActualizarCategoriaUserCases $actualizarUserCases)
     {
-        $this->comandBus = $commandBus;
+        $this->crearUserCases = $crearUserCases;
+        $this->actualizarUserCases = $actualizarUserCases;
     }
 
     public function __invoke(string $uuid, Request $request) : JsonResponse
     {
         $error = '';
         try {
-            $command = $this->getCommand($uuid, $request);
-            $this->comandBus->dispatch($command);
+
+            $categoriaCommand = CategoriaCommand::take(
+                $uuid,
+                $request->input('nombre'),
+                $request->input('descripcion'),
+                $request->input('estado')
+            );
+
+            $id = $request->input('id', '');
+
+            if(empty($id))
+                $this->crearUserCases->__invoke($categoriaCommand);
+
+            if(!empty($id))
+                $this->actualizarUserCases->__invoke($categoriaCommand);
+
+
         } catch (\Exception $e) {
             $error .= $e->getMessage();
         }
+
         $response = [
             'message' => strlen($error) ? $error : 'Articulo guardado con exito.',
             'code' => strlen($error) ? 401 : 201,
@@ -40,18 +59,5 @@ final class GuardarController extends Controller
         return response()->json($response, $response['code']);
     }
 
-    public function getCommand(string $uuid, Request $request)
-    {
-        $params = $request->input('params');
-        return empty($params['id']) ?
-            new CrearCategoriaCommand(
-                $uuid,
-                $request->input('params')
-            ) :
-            new ActualizarCategoriaCommand(
-                $uuid,
-                $request->input('params')
-            );
-    }
 
 }

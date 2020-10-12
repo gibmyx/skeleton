@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Skeleton\App\Categorias\Infrastructure\Doctrine;
 
 
+use Carbon\Carbon;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,15 +16,14 @@ use Skeleton\App\Categorias\Domain\Entity\CategoriaEntity;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
 use Skeleton\Shared\Application\Command\Command;
 
-final class CategoriaDoctrineRepository implements CategoriaRepository
+final class CategoriaDoctrineRepository  extends EntityRepository implements CategoriaRepository
 {
-
-    private $genericRepository;
-
-    public function __construct(ObjectRepository $genericRepository)
-    {
-        $this->genericRepository = $genericRepository;
-    }
+//    private $genericRepository;
+//
+//    public function __construct(ObjectRepository $genericRepository)
+//    {
+//        $this->genericRepository = $genericRepository;
+//    }
 
     public function save(Categoria $categoria): void
     {
@@ -33,11 +33,20 @@ final class CategoriaDoctrineRepository implements CategoriaRepository
 
     public function FindUuid(string $uuid): ?Categoria
     {
-        return $this->genericRepository->findOneBy(['uuid' => $uuid]);
+        return $this->findOneBy(['uuid' => $uuid]);
     }
 
-    public function update(Categoria $categoria): void
+    public function update(Command $categoria): void
     {
-        // TODO: Implement update() method.
+        $categoriaEntity = $this->FindUuid($categoria->Uuid());
+
+        if(is_null($categoriaEntity))
+            return;
+
+        $categoriaEntity->setNombre($categoria->Nombre());
+        $categoriaEntity->setDescripcion($categoria->Descripcion());
+        $categoriaEntity->setEstado($categoria->Estado());
+        $categoriaEntity->setUpdatedAt(Carbon::now());
+        EntityManager::flush();
     }
 }

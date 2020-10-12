@@ -1,16 +1,21 @@
 <?php
 
-
 declare(strict_types=1);
 
 
-namespace Unit;
+namespace Unit\src\app\Categorias\Infrastructure;
 
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
-final class MultipleDependenciesTest extends TestCase
+final class CreateCategoriaTest extends TestCase
 {
+
+    public function testCreateCategoria()
+    {
+        $this->assertSame('first', 'first');
+    }
+
     public function testProducerFirst()
     {
         $this->assertTrue(true);
