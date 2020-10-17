@@ -51,20 +51,20 @@ final class Categoria
      */
     private $updated_at;
 
-    private function __construct($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at)
-    {
-        $this->uuid = $uuid;
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->estado = $estado;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
-    }
-
-    public static function take ($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at): self
-    {
-        return new self($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at);
-    }
+//    private function __construct($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at)
+//    {
+//        $this->uuid = $uuid;
+//        $this->nombre = $nombre;
+//        $this->descripcion = $descripcion;
+//        $this->estado = $estado;
+//        $this->created_at = $created_at;
+//        $this->updated_at = $updated_at;
+//    }
+//
+//    public static function take ($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at): self
+//    {
+//        return new self($uuid, $nombre, $descripcion, $estado, $created_at, $updated_at);
+//    }
 
     /**
      * @return mixed
@@ -170,4 +170,20 @@ final class Categoria
         $this->updated_at = $updated_at;
     }
 
+    public function whitelist()
+    {
+        return [
+            'uuid',
+            'nombre',
+            'descripcion',
+            'estado',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    public function getProp(): array
+    {
+        return get_object_vars($this);
+    }
 }

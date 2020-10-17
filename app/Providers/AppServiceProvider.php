@@ -4,16 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use LaravelDoctrine\ORM\Facades\EntityManager;
-use Skeleton\App\Categorias\Application\UseCases\GetCategoriaUserCases;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Skeleton\App\Categorias\Domain\Entities\Categoria;
 use Skeleton\App\Categorias\Infrastructure\Doctrine\CategoriaDoctrineRepository;
 
 use Skeleton\App\Articulos\Domain\Repository\ArticuloRepository;
 use Skeleton\App\Articulos\Infrastructure\Eloquent\ArticuloEloquentRepository;
 use Skeleton\App\Categorias\Domain\Repository\CategoriaRepository;
-use Skeleton\App\Categorias\Infrastructure\Eloquent\CategoriaEloquentRepository;
+
 use Skeleton\App\Proveedores\Domain\Repository\ProveedorRepository;
 use Skeleton\App\Proveedores\Infrastructure\Eloquent\ProveedorEloquentRepository;
 use Skeleton\Shared\Application\Container\Contracts\Container;
@@ -37,12 +34,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-//        $this->app->bind(CategoriaRepository::class, function(){
-//            return new CategoriaDoctrineRepository(
-//                EntityManager::getRepository(Categoria::class)
-//            );
-//        });
 
         $this->app->bind(CategoriaRepository::class, function($app) {
             // This is what Doctrine's EntityRepository needs in its constructor.
@@ -71,12 +62,6 @@ class AppServiceProvider extends ServiceProvider
             ArticuloRepository::class,
             ArticuloEloquentRepository::class
         );
-
-//        $this->app->bind(
-//            CategoriaRepository::class,
-//            CategoriaEloquentRepository::class
-//        );
-
 
         $this->app->bind(
             ProveedorRepository::class,

@@ -61,4 +61,9 @@ final class CategoriaCommand implements Command
         return $this->estado;
     }
 
+    public function getProp(): array
+    {
+        return get_object_vars($this);
+    }
+
 }
